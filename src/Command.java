@@ -17,11 +17,11 @@ public class Command {
         return action.apply(args);
     }
 
-    public void help(){
-        System.out.println(help);
+    public String help(){
+        return help;
     }
 
-    public void getName(){
-        System.out.println(name);
+    public String getName(){
+        return name;
     }
 }

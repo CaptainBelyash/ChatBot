@@ -1,4 +1,5 @@
 import java.io.*; //Не делать так Google Java StyleGuide
+import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -8,77 +9,75 @@ import java.io.InputStreamReader;
 import java.util.function.Function;
 
 public class ConsoleBot {
-    private static HashSet<String> commands = new HashSet<>();
-    public static Map<String, Method> CommandsList;
+    public static HashMap<String, Command> commandsList = new HashMap<>();
+
+    private static void write(String output) {
+        System.out.println(output);
+    }
 
     private static void FillCommands() {
-        //var commandArray = new String[]{"exit", "help", "echo", "time"}; //Словарь с функциями
-        //commands.addAll(Arrays.asList(commandArray));
-        //CommandsList = new HashMap<String, Method>();
-        //CommandsList.put("help", Commands.Help); //Не знаю как передать метод. Класс тоже не принимает
+        var newCommand = new Command("error", "print error message", ConsoleBot::error);
+        commandsList.put(newCommand.getName(), newCommand);
+        newCommand = new Command("time", "print current time", ConsoleBot::time_command);
+        commandsList.put(newCommand.getName(), newCommand);
+        newCommand = new Command("greetings", "print greetings", ConsoleBot::greetings);
+        commandsList.put(newCommand.getName(), newCommand);
+        newCommand = new Command("help", "print help. you want something else?", ConsoleBot::help_command);
+        commandsList.put(newCommand.getName(), newCommand);
+        newCommand = new Command("echo", "print echo", ConsoleBot::echo_command);
+        commandsList.put(newCommand.getName(), newCommand);
     }
 
     public static void main(String[] args) throws IOException {
         FillCommands();
-        greetings();
+        greetings(new String[0]);
         BufferedReader reader =
                 new BufferedReader(new InputStreamReader(System.in));
-        loop1:
         while (true) {
-            String[] input = reader.readLine().split(" ");
+            var input = reader.readLine().split(" ");
             if (input.length < 1) {
-                error();
+                write( commandsList.get("error").execute(new String[0]));
                 continue;
             }
-            var command = input[0];
-            if (!commands.contains(command))
-                error();
-
-            switch (command) {
-                case "help": {
-                    help_command();
-                    break;
-                }
-                case "echo": {
-                    if (input.length < 2) {
-                        error();
-                        continue;
-                    }
-                    echo_command(input[1]);
-                    break;
-                }
-                case "time": {
-                    time_command();
-                    break;
-                }
-                case "exit": {
-                    System.out.println("Удачного дня!");
-                    break loop1;
-                }
+            var userCommand = input[0];
+            if (!commandsList.containsKey(userCommand)) {
+                write(commandsList.get("error").execute(new String[0]));
+                continue;
             }
+            var commandArgs = new String[0];
+            if (input.length > 1) {
+                commandArgs = Arrays.copyOfRange(input, 1, input.length);
+            }
+            write(commandsList.get(userCommand).execute(commandArgs));
         }
     }
 
-    private static void error() {
-        System.out.println("Wrong command or input data");
+    private static String error(String[] args) {
+        return "Wrong command or input data";
     }
 
-    private static void time_command() {
+    private static String time_command(String[] args) {
         var datetime = new Date();
-        System.out.println("Текущее время: " + datetime.toString());
+        return"Текущее время: " + datetime.toString();
     }
 
-    private static void greetings() {
-        System.out.println("Привет!");
-        System.out.println("Сегодня ты шёл по улице и увидел коробку с маленьким котёнком внутри.");
-        System.out.println("Конечно, ты не смог пройти мимо столь милого создания и забрал его с собой!");
+    private static String greetings(String[] args) {
+        write("Привет!");
+        write("Сегодня ты шёл по улице и увидел коробку с маленьким котёнком внутри.");
+        write("Конечно, ты не смог пройти мимо столь милого создания и забрал его с собой!");
+        return "";
     }
 
-    private static void help_command() throws IOException {
-        System.out.println("Чем я могу тебе помочь?");
+    private static String help_command(String[] args) {
+        write("Чем я могу тебе помочь?");
+        return "";
     }
 
-    private static void echo_command(String inputString) {
-        System.out.println(inputString);
+    private static String echo_command(String[] args) {
+        var stringBuilder = new StringBuilder();
+        for (var arg: args) {
+            stringBuilder.append(arg);
+        }
+        return stringBuilder.toString();
     }
 }
