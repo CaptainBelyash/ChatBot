@@ -1,20 +1,27 @@
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.function.Function;
 
 public class Command {
     private String name;
     private String help;
+    private Function<String[], String> action;
 
-    public Command(String inputName, String inputHelp){
-        name = inputName;
-        help = inputHelp;
+    public Command(String name, String help, Function<String[], String> action){
+        this.name = name;
+        this.help = help;
+        this.action = action;
     }
 
-    public void Help(){
+    public String execute(String[] args){
+        return action.apply(args);
+    }
+
+    public void help(){
         System.out.println(help);
     }
 
-    public void GetName(){
+    public void getName(){
         System.out.println(name);
     }
 }
