@@ -25,29 +25,33 @@ public class Pet {
         age = 0;
     }
 
-    public static void feed(){
+    public void feed(){
         satiety += 1;
+        satiety %= maxSatiety;
     }
 
-    public static void play(){
+    public void play(){
         happiness += 1;
-        peppiness -= 1;
+        happiness %= maxHappiness;
+        if (peppiness != 0)
+            peppiness -= 1;
     }
 
     //TODO: сделать зависимость от времени
-    public static void sleep(){
-        peppiness += 1;
+    public void sleep(int hours){
+        peppiness += hours;
+        peppiness %= maxPeppiness;
     }
 
-    public static String getCharacteristics(){
+    public String getCharacteristics(){
         String characteristics = "";
-        characteristics += "Pet: " + name + "\n";
-        characteristics += "Birthday: " + birthday.getBirthday() + "\n";
-        characteristics += "Age: " + age + "\n";
-        characteristics += "Health: " + health + "/" + maxHealth + "\n";
-        characteristics += "Happiness: " + happiness + "/" + maxHappiness + "\n";
-        characteristics += "Satiety: " + satiety + "/" + maxSatiety + "\n";
-        characteristics += "Peppiness: " + peppiness + "/" + maxPeppiness + "\n";
+        characteristics += "Питомец: " + name + "\n";
+        characteristics += "День рождения: " + birthday.getBirthday() + "\n";
+        characteristics += "Возраст: " + age + "\n";
+        characteristics += "Здоровье: " + health + "/" + maxHealth + "\n";
+        characteristics += "Счастье: " + happiness + "/" + maxHappiness + "\n";
+        characteristics += "Сытость: " + satiety + "/" + maxSatiety + "\n";
+        characteristics += "Бодрость: " + peppiness + "/" + maxPeppiness + "\n";
 
         return characteristics;
     }

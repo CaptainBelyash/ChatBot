@@ -33,10 +33,18 @@
   <component name="ProjectId" id="1Rf0zrjT95kZtzfMe2gUCvbtZ4O" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="settings.github" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Ирина Заец\Documents\GitHub\ChatBot\src" />
+      <recent name="C:\Users\Ирина Заец\Documents\GitHub\ChatBot\src\main" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -50,6 +58,20 @@
       </list>
     </option>
   </component>
+  <component name="RunManager">
+    <configuration name="ConsoleBot" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ConsoleBot" />
+      <module name="ChatBot" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.ConsoleBot" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -60,8 +82,13 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1570043108760</updated>
+      <workItem from="1570465428113" duration="621000" />
+      <workItem from="1570466132316" duration="7495000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
