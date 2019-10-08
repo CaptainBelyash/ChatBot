@@ -11,11 +11,9 @@ public class Pet {
     private static int maxSatiety = 10;
     private static int maxPeppiness = 10;
     private static int maxHappiness = 10;
-    private static int maxAge = 10;
-    //TODO: придумать максимальные характеристики
-    //TODO: зависимость между характеристиками
+    private static int maxAge = 100;
 
-    public Pet(String name){
+    public Pet(String name) {
         Pet.name = name;
         health = maxHealth;
         happiness = 10;
@@ -25,25 +23,24 @@ public class Pet {
         age = 0;
     }
 
-    public void feed(){
+    public void feed() {
         satiety += 1;
         satiety %= maxSatiety;
     }
 
-    public void play(){
+    public void play() {
         happiness += 1;
         happiness %= maxHappiness;
         if (peppiness != 0)
             peppiness -= 1;
     }
 
-    //TODO: сделать зависимость от времени
-    public void sleep(int hours){
+    public void sleep(int hours) {
         peppiness += hours;
         peppiness %= maxPeppiness;
     }
 
-    public String getCharacteristics(){
+    public String getCharacteristics() {
         String characteristics = "";
         characteristics += "Питомец: " + name + "\n";
         characteristics += "День рождения: " + birthday.getBirthday() + "\n";
