@@ -6,6 +6,7 @@ import java.util.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.function.Function;
 
 public class ConsoleBot {
     public static HashMap<String, Command> commandsList = new HashMap<>();
