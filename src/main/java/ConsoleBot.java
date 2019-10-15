@@ -26,7 +26,7 @@ public class ConsoleBot {
         newCommand = new Command("echo", "print echo", ConsoleBot::echo_command);
         commandsList.put(newCommand.getName(), newCommand);
     }
-
+/*
     public static void main(String[] args) throws IOException {
         FillCommands();
         greetings(new String[0]);
@@ -49,7 +49,7 @@ public class ConsoleBot {
             }
             write(commandsList.get(userCommand).execute(commandArgs));
         }
-    }
+    }*/
 
     private static String error(String[] args) {
         return "Wrong command or input data";
