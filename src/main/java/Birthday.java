@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class Birthday {
-    private static int day;
+    private static int day; //убрать статик //разобраться
     private static int month;
     private static int year;
     private static Date date;
@@ -15,7 +15,7 @@ public class Birthday {
         day = calendar.get(Calendar.DAY_OF_MONTH);
         month = calendar.get(Calendar.MONTH) + 1;
         year = calendar.get(Calendar.YEAR);
-        date = new Date();
+        date = new Date(); //не использоват (рекомендация)
     }
 
     public String getBirthday() {

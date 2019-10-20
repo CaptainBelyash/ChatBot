@@ -4,32 +4,32 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.function.Function;
-
-public class ConsoleBot {
+//TODO: TESTS!!!!!!!!!
+public class ConsoleBot { //статик???
     private static HashMap<String, Command> commandsList = new HashMap<>();
-    private static Pet pet;
+    private static Pet pet; //массив? словарь? лист? что?????
 
     private static void write(String output) {
         System.out.println(output);
     }
 
-    private static void createCommand(String name, String help, Function<String[], String> action) {
+    private static void makeCommand(String name, String help, Function<String[], String> action) { //переименовать!!!!!!
         var newCommand = new Command(name, help, action);
         commandsList.put(newCommand.getName(), newCommand);
     }
 
     private static void fillCommands() {
-        createCommand("help", "help: Выводит список доступных комманд.", ConsoleBot::helpCommand);
-        createCommand("create", "create [name]: Создаёт нового питомца с именем name.",
+        makeCommand("help", "help: Выводит список доступных комманд.", ConsoleBot::helpCommand);
+        makeCommand("create", "create [name]: Создаёт нового питомца с именем name.",
                 ConsoleBot::createCommand);
-        createCommand("feed", "feed: Покормить питомца. Прибавляет 1 к сытости.",
+        makeCommand("feed", "feed: Покормить питомца. Прибавляет 1 к сытости.",
                 ConsoleBot::feedCommand);
-        createCommand("play", "play: Поиграть с питомцем. Прибавляет 1 к счастью и отнимает 1 от бодрости.",
+        makeCommand("play", "play: Поиграть с питомцем. Прибавляет 1 к счастью и отнимает 1 от бодрости.",
                 ConsoleBot::playCommand);
-        createCommand("sleep",
+        makeCommand("sleep",
                 "sleep [hours]: Отправить питомца спать на hours часов. Прибавляет hours к бодрости.",
                 ConsoleBot::sleepCommand);
-        createCommand("chars", "chars: Получить характеристики питомца",
+        makeCommand("chars", "chars: Получить характеристики питомца",
                 ConsoleBot::getCharacteristicsCommand);
     }
 
@@ -55,7 +55,7 @@ public class ConsoleBot {
             }
             try {
                 write(commandsList.get(userCommand).execute(commandArgs));
-            } catch (Exception e) {
+            } catch (Exception e) { //сохранять/выводить инфу об ошибке
                 write(error());
             }
         }
@@ -70,7 +70,7 @@ public class ConsoleBot {
         return hello + commandsList.get("help").execute(new String[0]);
     }
 
-    private static String helpCommand(String[] args) {
+    private static String helpCommand(String[] args) { //не выполнять каждый раз (если пусто, то заполнить, если не пусто, вывести)
         StringBuilder help = new StringBuilder("\nКомманды, которые ты можешь использовать:");
         for (String command : commandsList.keySet()) {
             help.append("\n");

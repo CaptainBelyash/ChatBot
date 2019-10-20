@@ -1,20 +1,20 @@
 public class Pet {
-    private static int health;
-    private static int happiness;
-    private static int satiety; //сытость
-    private static int peppiness; //бодрость
-    private static String name;
-    private static Birthday birthday;
-    private static int age;
+    private int health; //убрать статик
+    private int happiness;
+    private int satiety; //сытость
+    private int peppiness; //бодрость
+    private String name;
+    private Birthday birthday;
+    private int age;
 
-    private static int maxHealth = 10;
-    private static int maxSatiety = 10;
-    private static int maxPeppiness = 10;
-    private static int maxHappiness = 10;
-    private static int maxAge = 100;
+    private int maxHealth = 10;
+    private int maxSatiety = 10;
+    private int maxPeppiness = 10;
+    private int maxHappiness = 10;
+    private int maxAge = 100;
 
     public Pet(String name) {
-        Pet.name = name;
+        this.name = name;
         health = maxHealth;
         happiness = 10;
         satiety = maxSatiety;
@@ -24,20 +24,20 @@ public class Pet {
     }
 
     public void feed() {
-        satiety += 1;
-        satiety %= maxSatiety;
+        if (satiety < maxSatiety)
+            satiety += 1;
     }
 
     public void play() {
-        happiness += 1;
-        happiness %= maxHappiness;
+        if (happiness < maxHappiness)
+            happiness += 1;
         if (peppiness != 0)
             peppiness -= 1;
     }
 
     public void sleep(int hours) {
-        peppiness += hours;
-        peppiness %= maxPeppiness;
+        if (peppiness < maxPeppiness)
+            peppiness += hours;
     }
 
     public String getCharacteristics() {

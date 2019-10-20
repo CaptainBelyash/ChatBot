@@ -35,13 +35,18 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resourses" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="settings.github" />
+    <property name="settings.editor.selected.configurable" value="http.proxy" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Ирина Заец\Documents\Bot\ChatBot\src\main\resourses" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Ирина Заец\Documents\Bot\ChatBot\src\main\resourses" />
       <recent name="C:\Users\Ирина Заец\Documents\GitHub\ChatBot\src\main\java" />
       <recent name="C:\Users\Ирина Заец\Documents\GitHub\ChatBot\src" />
       <recent name="C:\Users\Ирина Заец\Documents\GitHub\ChatBot\src\main" />
@@ -85,7 +90,9 @@
       <updated>1570043108760</updated>
       <workItem from="1570465428113" duration="621000" />
       <workItem from="1570466132316" duration="7796000" />
-      <workItem from="1570550493744" duration="2643000" />
+      <workItem from="1570550493744" duration="2915000" />
+      <workItem from="1570699436317" duration="4855000" />
+      <workItem from="1571576721134" duration="194000" />
     </task>
     <servers />
   </component>
