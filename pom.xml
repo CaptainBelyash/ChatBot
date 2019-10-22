@@ -39,6 +39,13 @@
             </plugin>
         </plugins>
     </build>
+    <dependencies>
+        <dependency>
+            <groupId>org.telegram</groupId>
+            <artifactId>telegrambotsextensions</artifactId>
+            <version>4.3</version>
+        </dependency>
+    </dependencies>
 
     <groupId>groupId</groupId>
     <artifactId>ChatBot</artifactId>
