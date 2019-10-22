@@ -3,12 +3,21 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import java.io.IOException;
+
 public class TelegramBot extends TelegramLongPollingBot {
+    private ConsoleBot bot = new ConsoleBot();
+
     public synchronized void sendMsg(String chatId, String s) throws TelegramApiException {
         SendMessage sendMess = new SendMessage();
         sendMess.enableMarkdown(true);
         sendMess.setChatId(chatId);
-        sendMess.setText(s);
+        try {
+            sendMess.setText(bot.commandInput(s));
+        }
+        catch (IOException e){
+
+        }
         execute(sendMess);
     }
 

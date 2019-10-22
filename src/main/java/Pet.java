@@ -1,22 +1,20 @@
 public class Pet {
-    private static int health;
-    private static int happiness;
-    private static int satiety; //сытость
-    private static int peppiness; //бодрость
-    private static String name;
-    private static Birthday birthday;
-    private static int age;
+    private int health; //убрать статик
+    private int happiness;
+    private int satiety; //сытость
+    private int peppiness; //бодрость
+    private String name;
+    private Birthday birthday;
+    private int age;
 
-    private static int maxHealth = 10;
-    private static int maxSatiety = 10;
-    private static int maxPeppiness = 10;
-    private static int maxHappiness = 10;
-    private static int maxAge = 10;
-    //TODO: придумать максимальные характеристики
-    //TODO: зависимость между характеристиками
+    private int maxHealth = 10;
+    private int maxSatiety = 10;
+    private int maxPeppiness = 10;
+    private int maxHappiness = 10;
+    private int maxAge = 100;
 
-    public Pet(String name){
-        Pet.name = name;
+    public Pet(String name) {
+        this.name = name;
         health = maxHealth;
         happiness = 10;
         satiety = maxSatiety;
@@ -25,29 +23,32 @@ public class Pet {
         age = 0;
     }
 
-    public static void feed(){
-        satiety += 1;
+    public void feed() {
+        if (satiety < maxSatiety)
+            satiety += 1;
     }
 
-    public static void play(){
-        happiness += 1;
-        peppiness -= 1;
+    public void play() {
+        if (happiness < maxHappiness)
+            happiness += 1;
+        if (peppiness != 0)
+            peppiness -= 1;
     }
 
-    //TODO: сделать зависимость от времени
-    public static void sleep(){
-        peppiness += 1;
+    public void sleep(int hours) {
+        if (peppiness < maxPeppiness)
+            peppiness += hours;
     }
 
-    public static String getCharacteristics(){
+    public String getCharacteristics() {
         String characteristics = "";
-        characteristics += "Pet: " + name + "\n";
-        characteristics += "Birthday: " + birthday.getBirthday() + "\n";
-        characteristics += "Age: " + age + "\n";
-        characteristics += "Health: " + health + "/" + maxHealth + "\n";
-        characteristics += "Happiness: " + happiness + "/" + maxHappiness + "\n";
-        characteristics += "Satiety: " + satiety + "/" + maxSatiety + "\n";
-        characteristics += "Peppiness: " + peppiness + "/" + maxPeppiness + "\n";
+        characteristics += "Питомец: " + name + "\n";
+        characteristics += "День рождения: " + birthday.getBirthday() + "\n";
+        characteristics += "Возраст: " + age + "\n";
+        characteristics += "Здоровье: " + health + "/" + maxHealth + "\n";
+        characteristics += "Счастье: " + happiness + "/" + maxHappiness + "\n";
+        characteristics += "Сытость: " + satiety + "/" + maxSatiety + "\n";
+        characteristics += "Бодрость: " + peppiness + "/" + maxPeppiness + "\n";
 
         return characteristics;
     }
