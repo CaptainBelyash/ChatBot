@@ -32,10 +32,10 @@ public class TelegramBot extends TelegramLongPollingBot {
     }
 
     public String getBotUsername() {
-        return "oop_java_tamagochi_bot";
+        return System.getenv("BOT_NAME");
     }
 
     public String getBotToken() {
-        return "914613974:AAHjtINzfERcjnjVgp105RARUyTcgVUcWFE";
+        return System.getenv("BOT_TOKEN");
     }
 }
