@@ -23,7 +23,7 @@
                     <assembleDirectory>target</assembleDirectory>
                     <programs>
                         <program>
-                            <mainClass>com.company.Main</mainClass>
+                            <mainClass>Main</mainClass>
                             <name>ChatBot</name>
                         </program>
                     </programs>
