@@ -17,6 +17,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -26,11 +27,23 @@
   <component name="ProjectId" id="1Rf0zrjT95kZtzfMe2gUCvbtZ4O" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/telegrambots-4.4.0.1-jar-with-dependencies.jar!/" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -44,25 +57,63 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="ConsoleBot" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ConsoleBot" />
+  <component name="RunManager" selected="JUnit.BirthdayTest.getBirthday">
+    <configuration name="BirthdayTest.getBirthday" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ChatBot" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="BirthdayTest" />
+      <option name="METHOD_NAME" value="getBirthday" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
+    <configuration name="PetTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ChatBot" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="PetTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PetTest.feed" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ChatBot" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="PetTest" />
+      <option name="METHOD_NAME" value="feed" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PetTest.play" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ChatBot" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="PetTest" />
+      <option name="METHOD_NAME" value="play" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PetTest.sleep" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ChatBot" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="PetTest" />
+      <option name="METHOD_NAME" value="sleep" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.ConsoleBot" />
+        <item itemvalue="JUnit.BirthdayTest.getBirthday" />
+        <item itemvalue="JUnit.PetTest" />
+        <item itemvalue="JUnit.PetTest.sleep" />
+        <item itemvalue="JUnit.PetTest.play" />
+        <item itemvalue="JUnit.PetTest.feed" />
       </list>
     </recent_temporary>
   </component>
@@ -76,6 +127,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1570043108760</updated>
+      <workItem from="1572183474792" duration="8000" />
     </task>
     <servers />
   </component>

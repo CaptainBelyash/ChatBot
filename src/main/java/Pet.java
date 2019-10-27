@@ -16,7 +16,7 @@ public class Pet {
     public Pet(String name) {
         this.name = name;
         health = maxHealth;
-        happiness = 10;
+        happiness = maxHappiness;
         satiety = maxSatiety;
         peppiness = maxPeppiness;
         birthday = new Birthday();
@@ -36,8 +36,9 @@ public class Pet {
     }
 
     public void sleep(int hours) {
-        if (peppiness < maxPeppiness)
-            peppiness += hours;
+        if (peppiness < maxPeppiness && hours > 0){
+            peppiness = Math.min(peppiness + hours, maxPeppiness);
+        }
     }
 
     public String getCharacteristics() {
@@ -51,5 +52,64 @@ public class Pet {
         characteristics += "Бодрость: " + peppiness + "/" + maxPeppiness + "\n";
 
         return characteristics;
+    }
+
+    public int getHealth(){
+        return health;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public Birthday getBirthday(){
+        return birthday;
+    }
+
+    public int getAge(){
+        return age;
+    }
+
+    public int getHappiness(){
+        return happiness;
+    }
+
+    public int getSatiety(){
+        return satiety;
+    }
+
+    public int getPeppiness(){
+        return peppiness;
+    }
+
+    public int getMaxHappiness(){
+        return maxHappiness;
+    }
+
+    public int getMaxSatiety(){
+        return maxSatiety;
+    }
+
+    public int getMaxPeppiness(){
+        return maxPeppiness;
+    }
+
+    public int getMaxHealth(){
+        return maxHealth;
+    }
+
+    public void setSatiety(int satiety){
+        if (satiety >= 0 && satiety <= maxSatiety)
+            this.satiety = satiety;
+    }
+
+    public void setHappiness(int happiness){
+        if (happiness >= 0 && happiness <= maxHappiness)
+            this.happiness = happiness;
+    }
+
+    public void setPeppiness(int peppiness){
+        if (peppiness >= 0 && peppiness <= maxPeppiness)
+            this.peppiness = peppiness;
     }
 }

@@ -95,6 +95,8 @@ public class ConsoleBot { //статик???
 
     private static String sleepCommand(String[] args) {
         int hours = Integer.parseInt(args[0]);
+        if (hours <= 0)
+            return error();
         pet.sleep(hours);
         return "+" + Integer.toString(hours) + " к бодрости";
     }
