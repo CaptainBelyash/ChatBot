@@ -7,7 +7,8 @@ import java.util.function.Function;
 //TODO: TESTS!!!!!!!!!
 public class ConsoleBot { //статик???
     private static HashMap<String, Command> commandsList = new HashMap<>();
-    private static Pet pet; //массив? словарь? лист? что?????
+    private static HashMap<String, Pet> pets = new HashMap<>();
+    private static String currentPlayerID = "";
 
     private static void write(String output) {
         System.out.println(output);
@@ -39,7 +40,8 @@ public class ConsoleBot { //статик???
                 ConsoleBot::greetings);
     }
 
-    public static String commandInput(String args) throws IOException {
+    public static String commandInput(String playerID, String args) throws IOException {
+        currentPlayerID = playerID;
         var input = args.split(" ");
         if (input.length < 1) {
             return error();
@@ -79,27 +81,29 @@ public class ConsoleBot { //статик???
 
     private static String createCommand(String[] args) {
         var name = args[0];
-        pet = new Pet(name);
-        return pet.getCharacteristics();
+        if (pets.containsKey(currentPlayerID))
+            return error();
+        pets.put(currentPlayerID, new Pet(name));
+        return pets.get(currentPlayerID).getCharacteristics();
     }
 
     private static String feedCommand(String[] args) {
-        pet.feed();
+        pets.get(currentPlayerID).feed();
         return "Очень вкусно! +1 к сытости";
     }
 
     private static String playCommand(String[] args) {
-        pet.play();
+        pets.get(currentPlayerID).play();
         return "Как весело! +1 к счастью";
     }
 
     private static String sleepCommand(String[] args) {
         int hours = Integer.parseInt(args[0]);
-        pet.sleep(hours);
+        pets.get(currentPlayerID).sleep(hours);
         return "+" + Integer.toString(hours) + " к бодрости";
     }
 
     private static String getCharacteristicsCommand(String[] args) {
-        return pet.getCharacteristics();
+        return pets.get(currentPlayerID).getCharacteristics();
     }
 }
