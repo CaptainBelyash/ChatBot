@@ -8,12 +8,12 @@ import java.io.IOException;
 public class TelegramBot extends TelegramLongPollingBot {
     private ConsoleBot bot = new ConsoleBot();
 
-    public synchronized void sendMsg(String chatId, String s) throws TelegramApiException {
+    public synchronized void sendMsg(String chatId, String input) throws TelegramApiException {
         SendMessage sendMess = new SendMessage();
         sendMess.enableMarkdown(true);
         sendMess.setChatId(chatId);
         try {
-            sendMess.setText(bot.commandInput(s));
+            sendMess.setText(bot.commandInput(chatId, input));
         }
         catch (IOException e){
 
