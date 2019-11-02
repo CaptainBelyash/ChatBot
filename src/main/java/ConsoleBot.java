@@ -87,6 +87,11 @@ public class ConsoleBot { //статик???
         return pets.get(currentPlayerID).getCharacteristics();
     }
 
+    private static String deleteCommand(String[] args) {
+        pets.remove(currentPlayerID);
+        return "Питомец удален";
+    }
+
     private static String feedCommand(String[] args) {
         pets.get(currentPlayerID).feed();
         return "Очень вкусно! +1 к сытости";
