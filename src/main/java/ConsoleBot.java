@@ -37,7 +37,7 @@ public class ConsoleBot { //статик???
         makeCommand("chars", "chars: Получить характеристики питомца",
                 ConsoleBot::getCharacteristicsCommand);
         makeCommand("delete", "delete: Удалить питомца",
-                ConsoleBot::getCharacteristicsCommand);
+                ConsoleBot::deleteCommand);
         makeCommand("/start", "start",
                 ConsoleBot::greetings);
     }
