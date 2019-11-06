@@ -16,7 +16,7 @@ public class ConsoleBot { //статик???
 
     public ConsoleBot(){
         fillCommands();
-    }
+    } // TODO: Запуск второго потока с отсчётом времени
 
     private static void makeCommand(String name, String help, Function<String[], String> action) { //переименовать!!!!!!
         var newCommand = new Command(name, help, action);
