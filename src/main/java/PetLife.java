@@ -3,7 +3,7 @@ import java.util.TimerTask;
 
 public class PetLife implements Runnable
 {
-    private int hungrySpeed = 3600; //секунды
+    private int hungrySpeed = 30; //секунды
     private int hopelessSpeed = 7200;
     private int growthSpeed = 86400;
     private int sleepinessSpeed = 3600;
