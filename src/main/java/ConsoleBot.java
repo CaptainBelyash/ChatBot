@@ -9,6 +9,7 @@ public class ConsoleBot { //статик???
     private static HashMap<String, Command> commandsList = new HashMap<>();
     private static HashMap<String, Pet> pets = new HashMap<>();
     private static String currentPlayerID = "";
+    private static PetLife petLife;
 
     private static void write(String output) {
         System.out.println(output);
@@ -16,6 +17,7 @@ public class ConsoleBot { //статик???
 
     public ConsoleBot(){
         fillCommands();
+
     } // TODO: Запуск второго потока с отсчётом времени
 
     private static void makeCommand(String name, String help, Function<String[], String> action) { //переименовать!!!!!!
@@ -81,12 +83,19 @@ public class ConsoleBot { //статик???
         return help.toString();
     }
 
-    private static String createCommand(String[] args) {
+    public static String createCommand(String[] args) { //private
         var name = args[0];
         if (pets.containsKey(currentPlayerID))
             return error();
         pets.put(currentPlayerID, new Pet(name));
+
+        petLife = new PetLife(pets.get(currentPlayerID));
+
+        Thread myThready = new Thread(petLife);
+        myThready.start();
+
         return pets.get(currentPlayerID).getCharacteristics();
+
     }
 
     private static String deleteCommand(String[] args) {

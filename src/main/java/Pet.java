@@ -52,4 +52,24 @@ public class Pet {
 
         return characteristics;
     }
+
+    public void reduceHappiness(){
+        if (happiness > 0)
+            happiness--;
+    }
+
+    public void reduceSatiety(){
+        if (satiety > 0)
+            satiety--;
+    }
+
+    public void reducePeppiness(){
+        if (peppiness > 0)
+            peppiness--;
+    }
+
+    public void increaseAge(){
+        if (age < maxAge)
+            age++;
+    }
 }
