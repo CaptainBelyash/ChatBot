@@ -1,47 +1,45 @@
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.function.Function;
 //TODO: TESTS!!!!!!!!!
-public class ConsoleBot { //статик???
+public class BotLogic { //TODO: убрать статики
     private static HashMap<String, Command> commandsList = new HashMap<>();
     private static HashMap<String, Pet> pets = new HashMap<>();
     private static String currentPlayerID = "";
     private static PetLife petLife;
+    private static String helpOutput;
 
     private static void write(String output) {
         System.out.println(output);
     }
 
-    public ConsoleBot(){
+    public BotLogic(){
         fillCommands();
+    }
 
-    } // TODO: Запуск второго потока с отсчётом времени
-
-    private static void makeCommand(String name, String help, Function<String[], String> action) { //переименовать!!!!!!
+    private static void makeCommand(String name, String help, Function<String[], String> action) {
         var newCommand = new Command(name, help, action);
         commandsList.put(newCommand.getName(), newCommand);
     }
 
     private static void fillCommands() {
-        makeCommand("help", "help: Выводит список доступных комманд.", ConsoleBot::helpCommand);
+        makeCommand("help", "help: Выводит список доступных комманд.", BotLogic::helpCommand);
         makeCommand("create", "create [name]: Создаёт нового питомца с именем name.",
-                ConsoleBot::createCommand);
+                BotLogic::createCommand);
         makeCommand("feed", "feed: Покормить питомца. Прибавляет 1 к сытости.",
-                ConsoleBot::feedCommand);
+                BotLogic::feedCommand);
         makeCommand("play", "play: Поиграть с питомцем. Прибавляет 1 к счастью и отнимает 1 от бодрости.",
-                ConsoleBot::playCommand);
+                BotLogic::playCommand);
         makeCommand("sleep",
                 "sleep [hours]: Отправить питомца спать на hours часов. Прибавляет hours к бодрости.",
-                ConsoleBot::sleepCommand);
+                BotLogic::sleepCommand);
         makeCommand("chars", "chars: Получить характеристики питомца",
-                ConsoleBot::getCharacteristicsCommand);
+                BotLogic::getCharacteristicsCommand);
         makeCommand("delete", "delete: Удалить питомца",
-                ConsoleBot::deleteCommand);
+                BotLogic::deleteCommand);
         makeCommand("/start", "start",
-                ConsoleBot::greetings);
+                BotLogic::greetings);
     }
 
     public static String commandInput(String playerID, String args) throws IOException {
@@ -60,7 +58,7 @@ public class ConsoleBot { //статик???
         }
         try {
             return commandsList.get(userCommand).execute(commandArgs);
-        } catch (Exception e) { //сохранять/выводить инфу об ошибке
+        } catch (Exception e) { //TODO: сохранять/выводить инфу об ошибке
             return error();
         }
     }
@@ -74,16 +72,19 @@ public class ConsoleBot { //статик???
         return hello + commandsList.get("help").execute(new String[0]);
     }
 
-    private static String helpCommand(String[] args) { //не выполнять каждый раз (если пусто, то заполнить, если не пусто, вывести)
-        StringBuilder help = new StringBuilder("\nКомманды, которые ты можешь использовать:");
-        for (String command : commandsList.keySet()) {
-            help.append("\n");
-            help.append(commandsList.get(command).help());
+    private static String helpCommand(String[] args) {
+        if (helpOutput.length() == 0){
+                StringBuilder help = new StringBuilder("\nКомманды, которые ты можешь использовать:");
+            for (String command : commandsList.keySet()) {
+                help.append("\n");
+                help.append(commandsList.get(command).help());
+            }
+            helpOutput = help.toString();
         }
-        return help.toString();
+        return helpOutput;
     }
 
-    public static String createCommand(String[] args) { //private
+    private static String createCommand(String[] args) {
         var name = args[0];
         if (pets.containsKey(currentPlayerID))
             return error();
@@ -100,26 +101,27 @@ public class ConsoleBot { //статик???
 
     private static String deleteCommand(String[] args) {
         pets.remove(currentPlayerID);
+
         return "Питомец удален";
     }
 
-    private static String feedCommand(String[] args) {
+    private synchronized static String feedCommand(String[] args) {
         pets.get(currentPlayerID).feed();
         return "Очень вкусно! +1 к сытости";
     }
 
-    private static String playCommand(String[] args) {
+    private synchronized static String playCommand(String[] args) {
         pets.get(currentPlayerID).play();
         return "Как весело! +1 к счастью";
     }
 
-    private static String sleepCommand(String[] args) {
+    private synchronized static String sleepCommand(String[] args) {
         int hours = Integer.parseInt(args[0]);
         pets.get(currentPlayerID).sleep(hours);
         return "+" + Integer.toString(hours) + " к бодрости";
     }
 
-    private static String getCharacteristicsCommand(String[] args) {
+    private synchronized static String getCharacteristicsCommand(String[] args) {
         return pets.get(currentPlayerID).getCharacteristics();
     }
 }

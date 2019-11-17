@@ -12,7 +12,7 @@ public class Task extends TimerTask {
     @Override
     public void run() {
         switch (characteristic){
-            case "happiness": {
+            case "happiness": { //TODO: убрать case
                 reduceHappiness();
                 break;
             }
@@ -31,19 +31,19 @@ public class Task extends TimerTask {
         }
     }
 
-    public void reduceHappiness(){
+    private synchronized void reduceHappiness(){
         pet.reduceHappiness();
     }
 
-    public void reduceSatiety(){
+    private synchronized void reduceSatiety(){
         pet.reduceSatiety();
     }
 
-    public void reducePeppiness(){
+    private synchronized void reducePeppiness(){
         pet.reducePeppiness();
     }
 
-    public void increaseAge(){
+    private synchronized void increaseAge(){
         pet.increaseAge();
     }
 }

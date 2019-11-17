@@ -6,7 +6,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import java.io.IOException;
 
 public class TelegramBot extends TelegramLongPollingBot {
-    private ConsoleBot bot = new ConsoleBot();
+    private BotLogic bot = new BotLogic();
 
     public synchronized void sendMsg(String chatId, String input) throws TelegramApiException {
         SendMessage sendMess = new SendMessage();
