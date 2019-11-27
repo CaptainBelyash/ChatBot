@@ -56,6 +56,7 @@ public class BotLogic { //TODO: убрать статики
         if (input.length > 1) {
             commandArgs = Arrays.copyOfRange(input, 1, input.length);
         }
+        ConverterJSON.toJSON(pets);
         try {
             return commandsList.get(userCommand).execute(commandArgs);
         } catch (Exception e) { //TODO: сохранять/выводить инфу об ошибке

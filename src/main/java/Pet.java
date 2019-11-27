@@ -1,17 +1,36 @@
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Pet {
-    private int health; //убрать статик
+    @JsonProperty("health")
+    private int health;
+    @JsonProperty("happiness")
     private int happiness;
+    @JsonProperty("satiety")
     private int satiety; //сытость
+    @JsonProperty("peppiness")
     private int peppiness; //бодрость
+    @JsonProperty("name")
     private String name;
+    @JsonIgnore
     private Birthday birthday;
+    @JsonProperty("age")
     private int age;
 
+    @JsonIgnore
     private int maxHealth = 10;
+    @JsonIgnore
     private int maxSatiety = 10;
+    @JsonIgnore
     private int maxPeppiness = 10;
+    @JsonIgnore
     private int maxHappiness = 10;
+    @JsonIgnore
     private int maxAge = 100;
+
+    public Pet() {
+    }
 
     public Pet(String name) {
         this.name = name;
