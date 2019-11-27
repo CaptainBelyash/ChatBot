@@ -61,11 +61,15 @@ public class Pet {
     public void reduceSatiety(){
         if (satiety > 0)
             satiety--;
+        else
+            reduceHappiness();
     }
 
     public void reducePeppiness(){
         if (peppiness > 0)
             peppiness--;
+        else
+            reduceHappiness();
     }
 
     public void increaseAge(){

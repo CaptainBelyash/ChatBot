@@ -45,8 +45,8 @@
     </option>
   </component>
   <component name="RunManager" selected="Application.Main">
-    <configuration name="ConsoleBot" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ConsoleBot" />
+    <configuration name="BotLogic" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="BotLogic" />
       <module name="ChatBot" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -62,7 +62,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.ConsoleBot" />
+        <item itemvalue="Application.BotLogic" />
       </list>
     </recent_temporary>
   </component>
