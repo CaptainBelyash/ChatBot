@@ -2,10 +2,10 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Birthday {
-    private static int day; //убрать статик //разобраться
-    private static int month;
-    private static int year;
-    private static Date date;
+    private int day; //убрать статик //разобраться
+    private int month;
+    private int year;
+    private Date date;
 
     public Birthday() {
         Calendar calendar = Calendar.getInstance();
