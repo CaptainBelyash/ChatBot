@@ -45,7 +45,7 @@ public class BotLogic {
         var userCommand = input[0];
 
         if (!commandsList.containsKey(userCommand)) {
-            return userCommand;
+            return error();
         }
         var commandArgs = new String[0];
         if (input.length > 1) {
@@ -54,7 +54,7 @@ public class BotLogic {
         try {
             return commandsList.get(userCommand).execute(commandArgs);
         } catch (Exception e) {
-            return error();
+            return userCommand;
         }
     }
 
