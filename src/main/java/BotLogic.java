@@ -82,7 +82,7 @@ public class BotLogic {
     public static String createCommand(String[] args) {
         var name = args[0];
         if (pets.containsKey(currentPlayerID))
-            return error();
+            return error("Pet exist");
         pets.put(currentPlayerID, new Pet(name));
 
         petLife = new PetLife(pets.get(currentPlayerID));
