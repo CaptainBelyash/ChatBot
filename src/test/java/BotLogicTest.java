@@ -16,12 +16,12 @@ class BotLogicTest {
     void commandInput() throws IOException {
         for (var command: new String[] {"", "aqqqq", "creeeeete", "fead"}){
             var result = botLogic.commandInput("", command);
-            Assertions.assertEquals(botLogic.error(), result);
+            Assertions.assertEquals(botLogic.error("No such command"), result);
         }
 
         for (var command: new String[] {"create", "sleep"}){
             var result = botLogic.commandInput("", command);
-            Assertions.assertEquals(botLogic.error(), result);
+            Assertions.assertEquals(botLogic.error(""), result);
         }
     }
 
@@ -92,6 +92,6 @@ class BotLogicTest {
         var pet = pets.get("1");
         Assertions.assertEquals("pet", pet.getName());
         var result = botLogic.createCommand(new String[] {"pet"});
-        Assertions.assertEquals(botLogic.error(), result);
+        Assertions.assertEquals(botLogic.error("Pet exist"), result);
     }
 }
