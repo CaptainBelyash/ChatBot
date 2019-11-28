@@ -10,10 +10,6 @@ public class BotLogic {
     private static PetLife petLife;
     private static String helpOutput;
 
-    private static void write(String output) {
-        System.out.println(output);
-    } //TODO: убрать?
-
     public BotLogic(){
         fillCommands();
     }
@@ -45,9 +41,7 @@ public class BotLogic {
     public static String commandInput(String playerID, String args) throws IOException {
         currentPlayerID = playerID;
         var input = args.split(" ");
-        if (input.length < 1) {
-            return error();
-        }
+        
         var userCommand = input[0];
         if (!commandsList.containsKey(userCommand)) {
             return error();
@@ -58,7 +52,7 @@ public class BotLogic {
         }
         try {
             return commandsList.get(userCommand).execute(commandArgs);
-        } catch (Exception e) { //TODO: сохранять/выводить инфу об ошибке
+        } catch (Exception e) {
             return error();
         }
     }
