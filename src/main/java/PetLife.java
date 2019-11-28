@@ -1,15 +1,14 @@
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class PetLife implements Runnable
-{
-    private int hungrySpeed = 360; //секунды
+public class PetLife implements Runnable {
+    private int hungrySpeed = 3; //секунды
     private int hopelessSpeed = 720;
     private int growthSpeed = 86400;
     private int sleepinessSpeed = 360;
     private Pet pet;
 
-    public PetLife(Pet pet){
+    public PetLife(Pet pet) {
         this.pet = pet;
     }
 

@@ -7,21 +7,21 @@ public class Command {
     private String help;
     private Function<String[], String> action;
 
-    public Command(String name, String help, Function<String[], String> action){
+    public Command(String name, String help, Function<String[], String> action) {
         this.name = name;
         this.help = help;
         this.action = action;
     }
 
-    public String execute(String[] args){
+    public String execute(String[] args) {
         return action.apply(args);
     }
 
-    public String help(){
+    public String help() {
         return help;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 }

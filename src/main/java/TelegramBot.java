@@ -14,8 +14,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         sendMess.setChatId(chatId);
         try {
             sendMess.setText(bot.commandInput(chatId, input));
-        }
-        catch (IOException e){
+        } catch (IOException e) {
 
         }
         execute(sendMess);

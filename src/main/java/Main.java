@@ -11,8 +11,7 @@ public class Main {
 
         try {
             bot.registerBot(new TelegramBot());
-        }
-        catch (TelegramApiException e){
+        } catch (TelegramApiException e) {
             e.printStackTrace();
         }
         System.out.println("ss");

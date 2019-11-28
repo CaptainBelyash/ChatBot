@@ -4,15 +4,15 @@ public class Task extends TimerTask {
     private String characteristic;
     private Pet pet;
 
-    public Task(Pet pet, String characteristic){
+    public Task(Pet pet, String characteristic) {
         this.characteristic = characteristic;
         this.pet = pet;
     }
 
     @Override
     public void run() {
-        switch (characteristic){
-            case "happiness": { //TODO: убрать case
+        switch (characteristic) {
+            case "happiness": {
                 reduceHappiness();
                 break;
             }
@@ -31,19 +31,19 @@ public class Task extends TimerTask {
         }
     }
 
-    private synchronized void reduceHappiness(){
+    private synchronized void reduceHappiness() {
         pet.reduceHappiness();
     }
 
-    private synchronized void reduceSatiety(){
+    private synchronized void reduceSatiety() {
         pet.reduceSatiety();
     }
 
-    private synchronized void reducePeppiness(){
+    private synchronized void reducePeppiness() {
         pet.reducePeppiness();
     }
 
-    private synchronized void increaseAge(){
+    private synchronized void increaseAge() {
         pet.increaseAge();
     }
 }

@@ -12,7 +12,7 @@ class PetTest {
     }
 
     @Test
-    void setCharacteristic(){
+    void setCharacteristic() {
         var originalSatiety = pet.getSatiety();
         var originalHappiness = pet.getHappiness();
         var originalPeppiness = pet.getPeppiness();
@@ -22,8 +22,8 @@ class PetTest {
         var maxPeppiness = pet.getMaxPeppiness();
         var maxAge = pet.getMaxAge();
 
-        for (var characteristic: new int[] {-100, -5, 0, 1, 3, 10, 100,
-                maxSatiety, maxHappiness, maxPeppiness, maxAge}){
+        for (var characteristic : new int[]{-100, -5, 0, 1, 3, 10, 100,
+                maxSatiety, maxHappiness, maxPeppiness, maxAge}) {
             pet.setSatiety(characteristic);
             pet.setHappiness(characteristic);
             pet.setPeppiness(characteristic);
@@ -58,7 +58,7 @@ class PetTest {
 
     @Test
     void feed() {
-        for (var satiety: new int[] {0, 1, 2, 3, 9, pet.getMaxSatiety()}){
+        for (var satiety : new int[]{0, 1, 2, 3, 9, pet.getMaxSatiety()}) {
             pet.setSatiety(satiety);
             pet.feed();
             if (satiety < pet.getMaxSatiety())
@@ -70,8 +70,8 @@ class PetTest {
 
     @Test
     void play() {
-        for (var happiness: new int[] {0, 1, 2, 3, 9, pet.getMaxHappiness()})
-            for (var peppiness: new int[] {0, 1, 2, 3, 9, pet.getMaxPeppiness()}){
+        for (var happiness : new int[]{0, 1, 2, 3, 9, pet.getMaxHappiness()})
+            for (var peppiness : new int[]{0, 1, 2, 3, 9, pet.getMaxPeppiness()}) {
                 pet.setPeppiness(peppiness);
                 pet.setHappiness(happiness);
                 pet.play();
@@ -88,22 +88,22 @@ class PetTest {
 
     @Test
     void sleep() {
-        for (var peppiness: new int[] {0, 1, 2, 3, 9, pet.getMaxPeppiness()})
-            for (var hours: new int[] {-10, -1, 0, 1, 2, 8, 9,
-                    pet.getMaxPeppiness(), pet.getMaxPeppiness() + 1}){
+        for (var peppiness : new int[]{0, 1, 2, 3, 9, pet.getMaxPeppiness()})
+            for (var hours : new int[]{-10, -1, 0, 1, 2, 8, 9,
+                    pet.getMaxPeppiness(), pet.getMaxPeppiness() + 1}) {
                 pet.setPeppiness(peppiness);
                 pet.sleep(hours);
                 if (hours <= 0)
                     Assertions.assertEquals(peppiness, pet.getPeppiness());
-                else{
+                else {
                     Assertions.assertEquals(Math.min(peppiness + hours, pet.getMaxPeppiness()), pet.getPeppiness());
                 }
             }
     }
 
     @Test
-    void reduceHappiness(){
-        for (var happiness: new int[] {1, 2, 3, 9, pet.getMaxHappiness()}) {
+    void reduceHappiness() {
+        for (var happiness : new int[]{1, 2, 3, 9, pet.getMaxHappiness()}) {
             pet.setHappiness(happiness);
             pet.reduceHappiness();
             Assertions.assertEquals(happiness - 1, pet.getHappiness());
@@ -114,13 +114,13 @@ class PetTest {
     }
 
     @Test
-    void reduceSatiety(){
-        for (var satiety: new int[] {1, 2, 3, 9, pet.getMaxSatiety()}) {
+    void reduceSatiety() {
+        for (var satiety : new int[]{1, 2, 3, 9, pet.getMaxSatiety()}) {
             pet.setSatiety(satiety);
             pet.reduceSatiety();
             Assertions.assertEquals(satiety - 1, pet.getSatiety());
         }
-        for (var happiness: new int[] {1, 2, 3, 9, pet.getMaxHappiness()}) {
+        for (var happiness : new int[]{1, 2, 3, 9, pet.getMaxHappiness()}) {
             pet.setHappiness(happiness);
             pet.setSatiety(0);
             pet.reduceSatiety();
@@ -135,13 +135,13 @@ class PetTest {
     }
 
     @Test
-    void reducePeppiness(){
-        for (var peppiness: new int[] {1, 2, 3, 9, pet.getMaxPeppiness()}) {
+    void reducePeppiness() {
+        for (var peppiness : new int[]{1, 2, 3, 9, pet.getMaxPeppiness()}) {
             pet.setPeppiness(peppiness);
             pet.reducePeppiness();
             Assertions.assertEquals(peppiness - 1, pet.getPeppiness());
         }
-        for (var happiness: new int[] {1, 2, 3, 9, pet.getMaxHappiness()}) {
+        for (var happiness : new int[]{1, 2, 3, 9, pet.getMaxHappiness()}) {
             pet.setHappiness(happiness);
             pet.setPeppiness(0);
             pet.reducePeppiness();
@@ -156,8 +156,8 @@ class PetTest {
     }
 
     @Test
-    void increaseAge(){
-        for (var age: new int[] {0, 1, 2, 3, 9, 50, 80, 99, pet.getMaxAge()}) {
+    void increaseAge() {
+        for (var age : new int[]{0, 1, 2, 3, 9, 50, 80, 99, pet.getMaxAge()}) {
             pet.setAge(age);
             pet.increaseAge();
             Assertions.assertEquals(Math.min(age + 1, pet.getMaxAge()), pet.getAge());

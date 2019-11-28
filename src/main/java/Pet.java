@@ -36,7 +36,7 @@ public class Pet {
     }
 
     public void sleep(int hours) {
-        if (hours >= 0 && peppiness <= maxPeppiness){
+        if (hours >= 0 && peppiness <= maxPeppiness) {
             peppiness = Math.min(peppiness + hours, maxPeppiness);
         }
     }
@@ -54,82 +54,82 @@ public class Pet {
         return characteristics;
     }
 
-    public void reduceHappiness(){
+    public void reduceHappiness() {
         if (happiness > 0)
             happiness--;
     }
 
-    public void reduceSatiety(){
+    public void reduceSatiety() {
         if (satiety > 0)
             satiety--;
         else
             reduceHappiness();
     }
 
-    public void reducePeppiness(){
+    public void reducePeppiness() {
         if (peppiness > 0)
             peppiness--;
         else
             reduceHappiness();
     }
 
-    public void increaseAge(){
+    public void increaseAge() {
         if (age < maxAge)
             age++;
     }
 
-    public int getSatiety(){
+    public int getSatiety() {
         return satiety;
     }
 
-    public int getHappiness(){
+    public int getHappiness() {
         return happiness;
     }
 
-    public int getPeppiness(){
+    public int getPeppiness() {
         return peppiness;
     }
 
-    public int getAge(){
+    public int getAge() {
         return age;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public int getMaxSatiety(){
+    public int getMaxSatiety() {
         return maxSatiety;
     }
 
-    public int getMaxHappiness(){
+    public int getMaxHappiness() {
         return maxHappiness;
     }
 
-    public int getMaxPeppiness(){
+    public int getMaxPeppiness() {
         return maxPeppiness;
     }
 
-    public int getMaxAge(){
+    public int getMaxAge() {
         return maxAge;
     }
 
-    public void setSatiety(int satiety){
+    public void setSatiety(int satiety) {
         if (satiety >= 0 && satiety <= maxSatiety)
             this.satiety = satiety;
     }
 
-    public void setHappiness(int happiness){
+    public void setHappiness(int happiness) {
         if (happiness >= 0 && happiness <= maxHappiness)
             this.happiness = happiness;
     }
 
-    public void setPeppiness(int peppiness){
+    public void setPeppiness(int peppiness) {
         if (peppiness >= 0 && peppiness <= maxPeppiness)
             this.peppiness = peppiness;
     }
 
-    public void setAge(int age){
+    public void setAge(int age) {
         if (age >= 0 && age <= maxAge)
             this.age = age;
     }

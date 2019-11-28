@@ -10,7 +10,7 @@ public class BotLogic {
     private static PetLife petLife;
     private static String helpOutput;
 
-    public BotLogic(){
+    public BotLogic() {
         fillCommands();
     }
 
@@ -68,7 +68,7 @@ public class BotLogic {
     }
 
     private static String helpCommand(String[] args) {
-        if (helpOutput.length() == 0){
+        if (helpOutput.length() == 0) {
             StringBuilder help = new StringBuilder("\nКомманды, которые ты можешь использовать:");
             for (var command : commandsList.keySet()) {
                 help.append("\n");
@@ -120,7 +120,7 @@ public class BotLogic {
         return pets.get(currentPlayerID).getCharacteristics();
     }
 
-    public HashMap<String, Pet> getPets(){
+    public HashMap<String, Pet> getPets() {
         return pets;
     }
 }
