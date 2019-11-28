@@ -41,10 +41,11 @@ public class BotLogic {
     public static String commandInput(String playerID, String args) throws IOException {
         currentPlayerID = playerID;
         var input = args.split(" ");
-        
+
         var userCommand = input[0];
+
         if (!commandsList.containsKey(userCommand)) {
-            return error();
+            return userCommand;
         }
         var commandArgs = new String[0];
         if (input.length > 1) {
