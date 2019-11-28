@@ -1,5 +1,5 @@
 public class Pet {
-    private int health; //убрать статик
+    private int health;
     private int happiness;
     private int satiety; //сытость
     private int peppiness; //бодрость
@@ -36,8 +36,9 @@ public class Pet {
     }
 
     public void sleep(int hours) {
-        if (peppiness < maxPeppiness)
-            peppiness += hours;
+        if (hours >= 0 && peppiness <= maxPeppiness){
+            peppiness = Math.min(peppiness + hours, maxPeppiness);
+        }
     }
 
     public String getCharacteristics() {
@@ -75,5 +76,61 @@ public class Pet {
     public void increaseAge(){
         if (age < maxAge)
             age++;
+    }
+
+    public int getSatiety(){
+        return satiety;
+    }
+
+    public int getHappiness(){
+        return happiness;
+    }
+
+    public int getPeppiness(){
+        return peppiness;
+    }
+
+    public int getAge(){
+        return age;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public int getMaxSatiety(){
+        return maxSatiety;
+    }
+
+    public int getMaxHappiness(){
+        return maxHappiness;
+    }
+
+    public int getMaxPeppiness(){
+        return maxPeppiness;
+    }
+
+    public int getMaxAge(){
+        return maxAge;
+    }
+
+    public void setSatiety(int satiety){
+        if (satiety >= 0 && satiety <= maxSatiety)
+            this.satiety = satiety;
+    }
+
+    public void setHappiness(int happiness){
+        if (happiness >= 0 && happiness <= maxHappiness)
+            this.happiness = happiness;
+    }
+
+    public void setPeppiness(int peppiness){
+        if (peppiness >= 0 && peppiness <= maxPeppiness)
+            this.peppiness = peppiness;
+    }
+
+    public void setAge(int age){
+        if (age >= 0 && age <= maxAge)
+            this.age = age;
     }
 }

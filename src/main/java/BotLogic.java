@@ -2,8 +2,8 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.function.Function;
-//TODO: TESTS!!!!!!!!!
-public class BotLogic { //TODO: убрать статики
+
+public class BotLogic {
     private static HashMap<String, Command> commandsList = new HashMap<>();
     private static HashMap<String, Pet> pets = new HashMap<>();
     private static String currentPlayerID = "";
@@ -12,7 +12,7 @@ public class BotLogic { //TODO: убрать статики
 
     private static void write(String output) {
         System.out.println(output);
-    }
+    } //TODO: убрать?
 
     public BotLogic(){
         fillCommands();
@@ -63,7 +63,7 @@ public class BotLogic { //TODO: убрать статики
         }
     }
 
-    private static String error() {
+    public static String error() {
         return "Wrong command or input data";
     }
 
@@ -84,7 +84,7 @@ public class BotLogic { //TODO: убрать статики
         return helpOutput;
     }
 
-    private static String createCommand(String[] args) {
+    public static String createCommand(String[] args) {
         var name = args[0];
         if (pets.containsKey(currentPlayerID))
             return error();
@@ -99,18 +99,18 @@ public class BotLogic { //TODO: убрать статики
 
     }
 
-    private static String deleteCommand(String[] args) {
+    public static String deleteCommand(String[] args) {
         pets.remove(currentPlayerID);
 
         return "Питомец удален";
     }
 
-    private synchronized static String feedCommand(String[] args) {
+    public synchronized static String feedCommand(String[] args) {
         pets.get(currentPlayerID).feed();
         return "Очень вкусно! +1 к сытости";
     }
 
-    private synchronized static String playCommand(String[] args) {
+    public synchronized static String playCommand(String[] args) {
         pets.get(currentPlayerID).play();
         return "Как весело! +1 к счастью";
     }
@@ -123,5 +123,9 @@ public class BotLogic { //TODO: убрать статики
 
     private synchronized static String getCharacteristicsCommand(String[] args) {
         return pets.get(currentPlayerID).getCharacteristics();
+    }
+
+    public HashMap<String, Pet> getPets(){
+        return pets;
     }
 }

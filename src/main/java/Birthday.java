@@ -24,4 +24,10 @@ public class Birthday {
         long milliseconds = now.getTime() - date.getTime();
         return (int) (milliseconds / (24 * 60 * 60 * 1000));
     }
+
+    public void setDate(int day, int month, int year){
+        this.day = day;
+        this.month = month;
+        this.year = year;
+    }
 }
