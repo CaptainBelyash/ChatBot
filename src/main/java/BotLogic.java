@@ -69,8 +69,8 @@ public class BotLogic {
 
     private static String helpCommand(String[] args) {
         if (helpOutput.length() == 0){
-                StringBuilder help = new StringBuilder("\nКомманды, которые ты можешь использовать:");
-            for (String command : commandsList.keySet()) {
+            StringBuilder help = new StringBuilder("\nКомманды, которые ты можешь использовать:");
+            for (var command : commandsList.keySet()) {
                 help.append("\n");
                 help.append(commandsList.get(command).help());
             }
