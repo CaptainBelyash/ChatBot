@@ -54,7 +54,7 @@ public class BotLogic {
         try {
             return commandsList.get(userCommand).execute(commandArgs);
         } catch (Exception e) {
-            return error(e.getMessage());
+            return error("");
         }
     }
 
