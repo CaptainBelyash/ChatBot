@@ -45,7 +45,7 @@ public class BotLogic {
         var userCommand = input[0];
 
         if (!commandsList.containsKey(userCommand)) {
-            return error();
+            return error("No such command");
         }
         var commandArgs = new String[0];
         if (input.length > 1) {
@@ -54,12 +54,12 @@ public class BotLogic {
         try {
             return commandsList.get(userCommand).execute(commandArgs);
         } catch (Exception e) {
-            return userCommand;
+            return error(e.getMessage());
         }
     }
 
-    public static String error() {
-        return "Wrong command or input data";
+    public static String error(String e) {
+        return "Error: " + e;
     }
 
     private static String greetings(String[] args) {
