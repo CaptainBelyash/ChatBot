@@ -15,16 +15,21 @@ public class TelegramBot extends TelegramLongPollingBot {
         notifyThread.start();
     }
 
-    public synchronized void sendMsg(String chatId, String input) throws TelegramApiException {
+    public synchronized void sendMsg(String chatId, String output) throws TelegramApiException {
         SendMessage sendMess = new SendMessage();
         sendMess.enableMarkdown(true);
         sendMess.setChatId(chatId);
+        sendMess.setText(output);
+
+        execute(sendMess);
+    }
+
+    public synchronized void giveAnswer(String chatId, String input) throws TelegramApiException{
         try {
-            sendMess.setText(bot.commandInput(chatId, input));
+            sendMsg(chatId, bot.commandInput(chatId, input));
         } catch (IOException e) {
 
         }
-        execute(sendMess);
     }
 
 
@@ -42,7 +47,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                 for (String playerID:
                      pets.keySet()) {
                     try {
-                        tgBot.sendMsg(playerID, "chars");
+                        tgBot.sendMsg(playerID, pets.get(playerID).getCharacteristics());
                     } catch (TelegramApiException e) {
                         e.printStackTrace();
                     }
@@ -60,7 +65,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
         String message = update.getMessage().getText();
         try {
-            sendMsg(update.getMessage().getChatId().toString(), message);
+            giveAnswer(update.getMessage().getChatId().toString(), message);
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
