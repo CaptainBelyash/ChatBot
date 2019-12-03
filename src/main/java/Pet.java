@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 public class Pet {
     private int health;
     private int happiness;
@@ -6,6 +8,11 @@ public class Pet {
     private String name;
     private Birthday birthday;
     private int age;
+
+    private int money;
+    private int initialMoney = 100;
+
+    private HashMap<String, Food> fridge;
 
     private int maxHealth = 10;
     private int maxSatiety = 10;
@@ -16,29 +23,52 @@ public class Pet {
     public Pet(String name) {
         this.name = name;
         health = maxHealth;
-        happiness = 10;
+        happiness = maxHappiness;
         satiety = maxSatiety;
         peppiness = maxPeppiness;
         birthday = new Birthday();
         age = 0;
+        money = initialMoney;
+        fridge = new HashMap<String, Food>();
     }
 
-    public void feed() {
-        if (satiety < maxSatiety)
-            satiety += 1;
+    public String feed(String foodName) {
+        if (!this.fridge.containsKey(foodName))
+            return "Такого продукта нет в холодильнике";
+        var food = this.fridge.get(foodName);
+        food.reduceAmount();
+        if (food.getAmount() == 0)
+            fridge.remove(foodName);
+        satiety += food.getSaturation();
+        if (satiety >= maxSatiety){
+            satiety = maxSatiety;
+            return "Я наелся!";
+        }
+        return "Очень вкусно! +" + food.getSaturation() + " к сытости";
     }
 
-    public void play() {
+    public void play() { //В будущем мини-игры, которые приносят разное количество денег, счастья и отнимают разное количество бодрости
         if (happiness < maxHappiness)
             happiness += 1;
         if (peppiness != 0)
             peppiness -= 1;
+        money += 1;
     }
 
     public void sleep(int hours) {
         if (hours >= 0 && peppiness <= maxPeppiness) {
             peppiness = Math.min(peppiness + hours, maxPeppiness);
         }
+    }
+
+    public String buyFood(Food food) {
+        if (food.getPrice() > money)
+            return "Недостаточно денег";
+        if (fridge.containsKey(food.getName()))
+            fridge.get(food.getName()).increaseAmount();
+        else
+            fridge.put(food.getName(), food);
+        return "Холодильник пополнен";
     }
 
     public String getCharacteristics() {
@@ -50,8 +80,18 @@ public class Pet {
         characteristics += "Счастье: " + happiness + "/" + maxHappiness + "\n";
         characteristics += "Сытость: " + satiety + "/" + maxSatiety + "\n";
         characteristics += "Бодрость: " + peppiness + "/" + maxPeppiness + "\n";
+        characteristics += "Деньги: " + money + "\n";
 
         return characteristics;
+    }
+
+    public String getFridgeAssortment() {
+        StringBuilder assortment = new StringBuilder("Ассортимент продуктов:");
+        for (var foodName: fridge.keySet()){
+            var food = fridge.get(foodName);
+            assortment.append("\n" + foodName + " Насыщение: " + food.getSaturation() + "Количество: " + food.getAmount());
+        }
+        return assortment.toString();
     }
 
     public void reduceHappiness() {
