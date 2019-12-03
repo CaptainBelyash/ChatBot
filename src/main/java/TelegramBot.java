@@ -53,7 +53,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                     }
                 }
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(20000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
