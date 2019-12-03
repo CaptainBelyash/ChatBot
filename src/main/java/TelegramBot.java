@@ -8,10 +8,11 @@ import java.util.HashMap;
 
 public class TelegramBot extends TelegramLongPollingBot {
     private BotLogic bot = new BotLogic();
+    private NotifyThread notifyThread;
     
     public TelegramBot(){
-        var thread = new NotifyThread(this);
-        thread.start();
+        notifyThread = new NotifyThread(this);
+        notifyThread.start();
     }
 
     public synchronized void sendMsg(String chatId, String input) throws TelegramApiException {
@@ -37,18 +38,20 @@ public class TelegramBot extends TelegramLongPollingBot {
 
         @Override
         public void run(){
-            for (String playerID:
-                 pets.keySet()) {
+            while (true){
+                for (String playerID:
+                     pets.keySet()) {
+                    try {
+                        tgBot.sendMsg(playerID, pets.get(playerID).getCharacteristics());
+                    } catch (TelegramApiException e) {
+                        e.printStackTrace();
+                    }
+                }
                 try {
-                    tgBot.sendMsg(playerID, pets.get(playerID).getCharacteristics());
-                } catch (TelegramApiException e) {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            }
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
         }
     }
