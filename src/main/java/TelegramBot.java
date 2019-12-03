@@ -42,7 +42,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                 for (String playerID:
                      pets.keySet()) {
                     try {
-                        tgBot.sendMsg(playerID, pets.get(playerID).getCharacteristics());
+                        tgBot.sendMsg(playerID, "chars");
                     } catch (TelegramApiException e) {
                         e.printStackTrace();
                     }
