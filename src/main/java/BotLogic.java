@@ -10,7 +10,7 @@ public class BotLogic {
     private static HashMap<String, Pet> pets = new HashMap<>();
     private static String currentPlayerID = "";
     private static PetLife petLife;
-    private static String helpOutput;
+    private static String helpOutput = "";
     private static FoodShop foodShop;
 
     public BotLogic() {
@@ -103,7 +103,7 @@ public class BotLogic {
         return pets.get(currentPlayerID).getCharacteristics();
 
     }
-    
+
     public static String deleteCommand(String[] args) {
         pets.remove(currentPlayerID);
         return "Питомец удален";
