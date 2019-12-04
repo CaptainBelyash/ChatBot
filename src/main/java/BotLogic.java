@@ -103,7 +103,7 @@ public class BotLogic {
         return pets.get(currentPlayerID).getCharacteristics();
 
     }
-
+    
     public static String deleteCommand(String[] args) {
         pets.remove(currentPlayerID);
         return "Питомец удален";
