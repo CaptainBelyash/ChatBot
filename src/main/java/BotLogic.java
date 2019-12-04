@@ -53,10 +53,10 @@ public class BotLogic {
         var input = args.split(" ");
         var output = "";
         var userCommand = input[0];
-
+        var success = true;
         if (!commandsList.containsKey(userCommand)) {
             output = error("No such command");
-            notifyQueue.get(currentPlayerID)
+            success = notifyQueue.get(currentPlayerID)
                     .offer(output);
             return output;
         }
@@ -66,12 +66,12 @@ public class BotLogic {
         }
         try {
             output = commandsList.get(userCommand).execute(commandArgs);
-            notifyQueue.get(currentPlayerID)
+            success = notifyQueue.get(currentPlayerID)
                     .offer(output);
             return output;
         } catch (Exception e) {
             output = error("Something broke everything here. Maybe it was a ghost?");
-            notifyQueue.get(currentPlayerID)
+            success = notifyQueue.get(currentPlayerID)
                     .offer(output);
             return output;
         }
