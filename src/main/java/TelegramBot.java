@@ -7,11 +7,11 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class TelegramBot extends TelegramLongPollingBot {
-    private BotLogic bot = new BotLogic();
-    private NotifyThread notifyThread;
+    public BotLogic bot = new BotLogic(); //ВРеменно паблик
+    private TgNotifyThread notifyThread;
     
     public TelegramBot(){
-        notifyThread = new NotifyThread(this);
+        notifyThread = new TgNotifyThread(this);
         notifyThread.start();
     }
 
@@ -29,35 +29,6 @@ public class TelegramBot extends TelegramLongPollingBot {
             sendMsg(chatId, bot.commandInput(chatId, input));
         } catch (IOException e) {
 
-        }
-    }
-
-
-    private static class NotifyThread extends Thread{
-        private HashMap<String, Pet> pets;
-        private TelegramBot tgBot;
-        NotifyThread(TelegramBot tgBot){
-            this.tgBot = tgBot;
-            pets = this.tgBot.bot.getPets();
-        }
-
-        @Override
-        public void run(){
-            while (true){
-                for (String playerID:
-                     pets.keySet()) {
-                    try {
-                        tgBot.sendMsg(playerID, pets.get(playerID).getCharacteristics());
-                    } catch (TelegramApiException e) {
-                        e.printStackTrace();
-                    }
-                }
-                try {
-                    Thread.sleep(20000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 
