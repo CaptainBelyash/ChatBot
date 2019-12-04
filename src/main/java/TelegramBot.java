@@ -4,14 +4,12 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 public class TelegramBot extends TelegramLongPollingBot {
     public BotLogic bot = new BotLogic(); //ВРеменно паблик
-    private TgNotifyThread notifyThread;
-    
+
     public TelegramBot(){
-        notifyThread = new TgNotifyThread(this);
+        TgNotifyThread notifyThread = new TgNotifyThread(this);
         notifyThread.start();
     }
 
@@ -24,11 +22,11 @@ public class TelegramBot extends TelegramLongPollingBot {
         execute(sendMess);
     }
 
-    public synchronized void giveAnswer(String chatId, String input) throws TelegramApiException{
+    public synchronized void userAction(String chatId, String input) throws TelegramApiException{
         try {
-            sendMsg(chatId, bot.commandInput(chatId, input));
+            bot.commandInput(chatId, input);
         } catch (IOException e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -36,7 +34,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
         String message = update.getMessage().getText();
         try {
-            giveAnswer(update.getMessage().getChatId().toString(), message);
+            userAction(update.getMessage().getChatId().toString(), message);
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }

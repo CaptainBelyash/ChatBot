@@ -1,12 +1,12 @@
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Deque;
+import java.util.Queue;
 import java.util.HashMap;
 import java.util.function.Function;
 
 public class BotLogic {
     private static HashMap<String, Command> commandsList = new HashMap<>();
-    private static HashMap<String, Deque<String>> notifyDeque = new HashMap<>();
+    private static HashMap<String, Queue<String>> notifyQueue = new HashMap<>();
     private static HashMap<String, Pet> pets = new HashMap<>();
     private static String currentPlayerID = "";
     private static PetLife petLife;
@@ -48,23 +48,26 @@ public class BotLogic {
                 BotLogic::greetings);
     }
 
-    public static String commandInput(String playerID, String args) throws IOException {
+    public static void commandInput(String playerID, String args) throws IOException {
         currentPlayerID = playerID;
         var input = args.split(" ");
 
         var userCommand = input[0];
 
         if (!commandsList.containsKey(userCommand)) {
-            return error("No such command");
+            notifyQueue.get(currentPlayerID)
+                    .offer(error("No such command"));
         }
         var commandArgs = new String[0];
         if (input.length > 1) {
             commandArgs = Arrays.copyOfRange(input, 1, input.length);
         }
         try {
-            return commandsList.get(userCommand).execute(commandArgs);
+            notifyQueue.get(currentPlayerID)
+                    .offer(commandsList.get(userCommand).execute(commandArgs));
         } catch (Exception e) {
-            return error("Something broke everything here. Maybe it was a ghost?");
+            notifyQueue.get(currentPlayerID)
+                    .offer(error("Something broke everything here. Maybe it was a ghost?"));
         }
     }
 
