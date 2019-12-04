@@ -23,6 +23,8 @@ public class TelegramBot extends TelegramLongPollingBot {
     }
 
     public synchronized void userAction(String chatId, String input) throws TelegramApiException{
+
+        sendMsg(chatId,"here must be messsasasasda");
         try {
             var out = bot.commandInput(chatId, input);
             sendMsg(chatId,"here must be mess");
