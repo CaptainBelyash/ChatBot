@@ -1,10 +1,12 @@
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.function.Function;
 
 public class BotLogic {
     private static HashMap<String, Command> commandsList = new HashMap<>();
+    private static HashMap<String, Deque<String>> notifyDeque = new HashMap<>();
     private static HashMap<String, Pet> pets = new HashMap<>();
     private static String currentPlayerID = "";
     private static PetLife petLife;
