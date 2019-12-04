@@ -64,7 +64,7 @@ public class BotLogic {
         try {
             return commandsList.get(userCommand).execute(commandArgs);
         } catch (Exception e) {
-            return error("");
+            return error("Something broke everything here. Maybe it was a ghost?");
         }
     }
 
