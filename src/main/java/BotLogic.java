@@ -157,4 +157,7 @@ public class BotLogic {
     public HashMap<String, Pet> getPets() {
         return pets;
     }
+    public HashMap<String, Queue<String>> getNotifys() {
+        return notifyQueue;
+    }
 }
