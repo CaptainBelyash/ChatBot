@@ -20,7 +20,6 @@ public class TgNotifyThread extends Thread{
                     var nextNotify = notifys.get(playerID).poll();
                     while (nextNotify != null){
                         tgBot.sendMsg(playerID, nextNotify);
-                        tgBot.sendMsg(playerID, "a");
                         nextNotify = notifys.get(playerID).poll();
                     }
                 } catch (TelegramApiException e) {
