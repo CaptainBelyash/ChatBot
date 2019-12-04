@@ -25,6 +25,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     public synchronized void userAction(String chatId, String input) throws TelegramApiException{
         try {
             var out = bot.commandInput(chatId, input);
+            sendMsg(chatId,"here must be mess");
         } catch (IOException e) {
             e.printStackTrace();
         }
