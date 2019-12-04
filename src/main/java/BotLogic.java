@@ -48,26 +48,32 @@ public class BotLogic {
                 BotLogic::greetings);
     }
 
-    public static void commandInput(String playerID, String args) throws IOException {
+    public static String commandInput(String playerID, String args) throws IOException {
         currentPlayerID = playerID;
         var input = args.split(" ");
-
+        var output = "";
         var userCommand = input[0];
 
         if (!commandsList.containsKey(userCommand)) {
+            output = error("No such command");
             notifyQueue.get(currentPlayerID)
-                    .offer(error("No such command"));
+                    .offer(output);
+            return output;
         }
         var commandArgs = new String[0];
         if (input.length > 1) {
             commandArgs = Arrays.copyOfRange(input, 1, input.length);
         }
         try {
+            output = commandsList.get(userCommand).execute(commandArgs);
             notifyQueue.get(currentPlayerID)
-                    .offer(commandsList.get(userCommand).execute(commandArgs));
+                    .offer(output);
+            return output;
         } catch (Exception e) {
+            output = error("Something broke everything here. Maybe it was a ghost?");
             notifyQueue.get(currentPlayerID)
-                    .offer(error("Something broke everything here. Maybe it was a ghost?"));
+                    .offer(output);
+            return output;
         }
     }
 
