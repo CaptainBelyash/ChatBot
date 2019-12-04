@@ -27,6 +27,7 @@ public class TelegramBot extends TelegramLongPollingBot {
             var out = bot.commandInput(chatId, input);
             sendMsg(chatId,"here must be mess");
         } catch (IOException e) {
+            sendMsg(chatId,"here error");
             e.printStackTrace();
         }
     }
