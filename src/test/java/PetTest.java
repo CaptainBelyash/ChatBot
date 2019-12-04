@@ -60,7 +60,7 @@ class PetTest {
     void feed() {
         for (var satiety : new int[]{0, 1, 2, 3, 9, pet.getMaxSatiety()}) {
             pet.setSatiety(satiety);
-            pet.feed();
+            pet.feed("SimpleFood");
             if (satiety < pet.getMaxSatiety())
                 Assertions.assertEquals(satiety + 1, pet.getSatiety());
             else
