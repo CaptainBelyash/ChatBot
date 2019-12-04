@@ -37,7 +37,7 @@ public class Pet {
             return "Такого продукта нет в холодильнике";
         var food = this.fridge.get(foodName);
         food.reduceAmount();
-        if (food.getAmount() == 0)
+        if (food.getAmount() <= 0)
             fridge.remove(foodName);
         satiety += food.getSaturation();
         if (satiety >= maxSatiety){
@@ -68,6 +68,7 @@ public class Pet {
             fridge.get(food.getName()).increaseAmount();
         else
             fridge.put(food.getName(), food);
+        money -= food.getPrice();
         return "Холодильник пополнен";
     }
 
@@ -154,6 +155,14 @@ public class Pet {
         return maxAge;
     }
 
+    public int getMoney() {
+        return money;
+    }
+
+    public HashMap<String, Food> getFridge() {
+        return fridge;
+    }
+
     public void setSatiety(int satiety) {
         if (satiety >= 0 && satiety <= maxSatiety)
             this.satiety = satiety;
@@ -172,5 +181,16 @@ public class Pet {
     public void setAge(int age) {
         if (age >= 0 && age <= maxAge)
             this.age = age;
+    }
+
+    public void setFridgeItem(Food food) {
+        if (fridge.containsKey(food.getName()))
+            fridge.get(food.getName()).increaseAmount();
+        else
+            fridge.put(food.getName(), food);
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
     }
 }
