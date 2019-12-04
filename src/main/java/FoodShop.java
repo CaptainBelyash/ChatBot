@@ -10,19 +10,23 @@ public class FoodShop {
     }
 
     private void putFood(String name, int price, int saturation){
-        assortment.put(name, new Food(name, price, saturation, 0));
+        assortment.put(name, new Food(name, price, saturation, 1));
     }
 
     public Food buy(String foodName) {
         return assortment.get(foodName);
     }
 
-    public String getAssortment() {
+    public String showAssortment() {
         StringBuilder assortment = new StringBuilder("Ассортимент продуктов:");
         for (var foodName: this.assortment.keySet()){
             var food = this.assortment.get(foodName);
             assortment.append("\n" + foodName + " Цена: " + food.getPrice() + " Насыщение: " + food.getSaturation());
         }
         return assortment.toString();
+    }
+
+    public HashMap<String, Food> getAssortment() {
+        return assortment;
     }
 }

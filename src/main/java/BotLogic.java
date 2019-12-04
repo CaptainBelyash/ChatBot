@@ -138,7 +138,7 @@ public class BotLogic {
     }
 
     private synchronized static String getAssortmentCommand(String[] args) {
-        return foodShop.getAssortment();
+        return foodShop.showAssortment();
     }
 
     private synchronized static String getFridgeAssortmentCommand(String[] args) {

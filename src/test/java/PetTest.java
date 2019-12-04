@@ -58,14 +58,21 @@ class PetTest {
 
     @Test
     void feed() {
+        var foodShop = new FoodShop();
+        var assortment = foodShop.getAssortment();
         for (var satiety : new int[]{0, 1, 2, 3, 9, pet.getMaxSatiety()}) {
-            pet.setSatiety(satiety);
-            pet.feed("SimpleFood");
-            if (satiety < pet.getMaxSatiety())
-                Assertions.assertEquals(satiety + 1, pet.getSatiety());
-            else
-                Assertions.assertEquals(pet.getMaxSatiety(), pet.getSatiety());
+            for (var food : assortment.keySet()) {
+                pet.setFridgeItem(assortment.get(food));
+                var saturation = assortment.get(food).getSaturation();
+                pet.setSatiety(satiety);
+                pet.feed(food);
+                if (satiety + saturation <= pet.getMaxSatiety())
+                    Assertions.assertEquals(satiety + saturation, pet.getSatiety());
+                else
+                    Assertions.assertEquals(pet.getMaxSatiety(), pet.getSatiety());
+            }
         }
+        Assertions.assertEquals(pet.feed(""), "Такого продукта нет в холодильнике");
     }
 
     @Test
@@ -74,6 +81,7 @@ class PetTest {
             for (var peppiness : new int[]{0, 1, 2, 3, 9, pet.getMaxPeppiness()}) {
                 pet.setPeppiness(peppiness);
                 pet.setHappiness(happiness);
+                var originalMoney = pet.getMoney();
                 pet.play();
                 if (happiness < pet.getMaxHappiness())
                     Assertions.assertEquals(happiness + 1, pet.getHappiness());
@@ -83,6 +91,7 @@ class PetTest {
                     Assertions.assertEquals(peppiness - 1, pet.getPeppiness());
                 else
                     Assertions.assertEquals(0, pet.getPeppiness());
+                Assertions.assertEquals(originalMoney + 1, pet.getMoney());
             }
     }
 
@@ -161,6 +170,28 @@ class PetTest {
             pet.setAge(age);
             pet.increaseAge();
             Assertions.assertEquals(Math.min(age + 1, pet.getMaxAge()), pet.getAge());
+        }
+    }
+
+    @Test
+    void buyFood() {
+        var foodShop = new FoodShop();
+        var assortment = foodShop.getAssortment();
+        pet.setMoney(0);
+        for (var food : assortment.values()) {
+            Assertions.assertEquals("Недостаточно денег", pet.buyFood(food));
+        }
+        for (var food : assortment.values()) {
+            pet.setMoney(2 * food.getPrice());
+            pet.buyFood(food);
+            Assertions.assertEquals(food.getPrice(), pet.getMoney());
+            Assertions.assertTrue(pet.getFridge().containsKey(food.getName()));
+            Assertions.assertEquals(1, pet.getFridge().get(food.getName()).getAmount());
+
+            pet.buyFood(food);
+            Assertions.assertEquals(0, pet.getMoney());
+            Assertions.assertTrue(pet.getFridge().containsKey(food.getName()));
+            Assertions.assertEquals(2, pet.getFridge().get(food.getName()).getAmount());
         }
     }
 }
