@@ -1,12 +1,12 @@
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Queue;
+import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.function.Function;
 
 public class BotLogic {
     private static HashMap<String, Command> commandsList = new HashMap<>();
-    private static HashMap<String, Queue<String>> notifyQueue = new HashMap<>();
+    private static HashMap<String, ArrayDeque<String>> notifyQueue = new HashMap<>();
     private static HashMap<String, Pet> pets = new HashMap<>();
     private static String currentPlayerID = "";
     private static PetLife petLife;
@@ -53,11 +53,9 @@ public class BotLogic {
         var input = args.split(" ");
         var output = "";
         var userCommand = input[0];
-        var success = true;
         if (!commandsList.containsKey(userCommand)) {
             output = error("No such command");
-            success = notifyQueue.get(currentPlayerID)
-                    .offer(output);
+            queueAdd(currentPlayerID, output);
             return output;
         }
         var commandArgs = new String[0];
@@ -66,15 +64,19 @@ public class BotLogic {
         }
         try {
             output = commandsList.get(userCommand).execute(commandArgs);
-            success = notifyQueue.get(currentPlayerID)
-                    .offer(output);
+            queueAdd(currentPlayerID, output);
             return output;
         } catch (Exception e) {
             output = error("Something broke everything here. Maybe it was a ghost?");
-            success = notifyQueue.get(currentPlayerID)
-                    .offer(output);
+            queueAdd(currentPlayerID, output);
             return output;
         }
+    }
+
+    private static void queueAdd(String playerID, String value){
+        if (!notifyQueue.containsKey(playerID))
+            notifyQueue.put(playerID, new ArrayDeque<String>());
+        var success = notifyQueue.get(playerID).offer(value);
     }
 
     public static String error(String e) {
@@ -157,7 +159,7 @@ public class BotLogic {
     public HashMap<String, Pet> getPets() {
         return pets;
     }
-    public HashMap<String, Queue<String>> getNotifys() {
+    public HashMap<String, ArrayDeque<String>> getNotifys() {
         return notifyQueue;
     }
 }
