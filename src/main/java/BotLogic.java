@@ -27,7 +27,7 @@ public class BotLogic {
         makeCommand("help", "help: Выводит список доступных комманд.", BotLogic::helpCommand);
         makeCommand("create", "create [name]: Создаёт нового питомца с именем name.",
                 BotLogic::createCommand);
-        makeCommand("feed [food]", "feed: Покормить питомца едой food. Увеличивает сытость. Кормить питомца можно только едой из холодильника.",
+        makeCommand("feed", "feed [food]: Покормить питомца едой food. Увеличивает сытость. Кормить питомца можно только едой из холодильника.",
                 BotLogic::feedCommand);
         makeCommand("play", "play: Поиграть с питомцем. Прибавляет 1 к счастью и отнимает 1 от бодрости. Добавляет деньги.",
                 BotLogic::playCommand);
@@ -38,7 +38,7 @@ public class BotLogic {
                 BotLogic::getCharacteristicsCommand);
         makeCommand("delete", "delete: Удалить питомца",
                 BotLogic::deleteCommand);
-        makeCommand("buy [food]", "buy: Купить еду food. Купленная еда добавляется в холодильник.",
+        makeCommand("buy", "buy [food]: Купить еду food. Купленная еда добавляется в холодильник.",
                 BotLogic::buyCommand);
         makeCommand("shop", "shop: Получить ассортимент товаров в магазине.",
                 BotLogic::getAssortmentCommand);
