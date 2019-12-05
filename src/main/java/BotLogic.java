@@ -16,6 +16,8 @@ public class BotLogic {
     public BotLogic() {
         fillCommands();
         foodShop = new FoodShop();
+        var notifyMoveThread = new MoveNotificationThread(this);
+        notifyMoveThread.start();
     }
 
     private static void makeCommand(String name, String help, Function<String[], String> action) {
@@ -159,6 +161,17 @@ public class BotLogic {
     public HashMap<String, Pet> getPets() {
         return pets;
     }
+
+    public void movePetNotify(){
+        for (var playerID:pets.keySet()){
+            var nextNotify = pets.get(playerID).getNotifys().poll();
+            while (nextNotify != null){
+                queueAdd(playerID, nextNotify);
+                nextNotify = pets.get(playerID).getNotifys().poll();
+            }
+        }
+    }
+
     public HashMap<String, ArrayDeque<String>> getNotifys() {
         return notifyQueue;
     }
