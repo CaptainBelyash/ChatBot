@@ -1,3 +1,4 @@
+import java.util.ArrayDeque;
 import java.util.HashMap;
 
 public class Pet {
@@ -9,6 +10,8 @@ public class Pet {
     private Birthday birthday;
     private int age;
 
+    private ArrayDeque<String> notifys = new ArrayDeque<String>();
+
     private int money;
     private int initialMoney = 100;
 
@@ -19,6 +22,10 @@ public class Pet {
     private int maxPeppiness = 10;
     private int maxHappiness = 10;
     private int maxAge = 100;
+
+    public ArrayDeque<String> getNotifys() {
+        return notifys;
+    }
 
     public Pet(String name) {
         this.name = name;
@@ -96,11 +103,15 @@ public class Pet {
     }
 
     public void reduceHappiness() {
+        if (happiness == 1)
+            notifys.offer("Я очень сльно грущу");
         if (happiness > 0)
             happiness--;
     }
 
     public void reduceSatiety() {
+        if (satiety == 1)
+            notifys.offer("Я голоден");
         if (satiety > 0)
             satiety--;
         else
