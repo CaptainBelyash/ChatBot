@@ -1,19 +1,18 @@
 import java.util.ArrayDeque;
 import java.util.HashMap;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Pet {
-    private AtomicInteger health;
-    private AtomicInteger happiness;
-    private AtomicInteger satiety; //сытость
-    private AtomicInteger peppiness; //бодрость
+    private int health;
+    private int happiness;
+    private int satiety; //сытость
+    private int peppiness; //бодрость
     private String name;
     private Birthday birthday;
-    private AtomicInteger age;
+    private int age;
 
     private ArrayDeque<String> notifys = new ArrayDeque<String>();
 
-    private AtomicInteger money;
+    private int money;
     private int initialMoney = 100;
 
     private HashMap<String, Food> fridge;
@@ -30,13 +29,13 @@ public class Pet {
 
     public Pet(String name) {
         this.name = name;
-        health = new AtomicInteger(maxHealth);
-        happiness = new AtomicInteger(maxHappiness);
-        satiety = new AtomicInteger(maxSatiety);
-        peppiness = new AtomicInteger(maxPeppiness);
+        health = maxHealth;
+        happiness = maxHappiness;
+        satiety = maxSatiety;
+        peppiness = maxPeppiness;
         birthday = new Birthday();
-        age = new AtomicInteger(0);
-        money = new AtomicInteger(initialMoney);
+        age = 0;
+        money = initialMoney;
         fridge = new HashMap<String, Food>();
     }
 
@@ -47,36 +46,36 @@ public class Pet {
         food.reduceAmount();
         if (food.getAmount() <= 0)
             fridge.remove(foodName);
-        satiety.addAndGet(food.getSaturation());
-        if (satiety.get() >= maxSatiety){
-            satiety.set(maxSatiety);
+        satiety += food.getSaturation();
+        if (satiety >= maxSatiety){
+            satiety = maxSatiety;
             return "Я наелся!";
         }
         return "Очень вкусно! +" + food.getSaturation() + " к сытости";
     }
 
-    public synchronized void play() { //В будущем мини-игры, которые приносят разное количество денег, счастья и отнимают разное количество бодрости
-        if (happiness.get() < maxHappiness)
-            happiness.incrementAndGet();
-        if (peppiness.get() != 0)
-            peppiness.decrementAndGet();
-        money.incrementAndGet();
+    public void play() { //В будущем мини-игры, которые приносят разное количество денег, счастья и отнимают разное количество бодрости
+        if (happiness < maxHappiness)
+            happiness += 1;
+        if (peppiness != 0)
+            peppiness -= 1;
+        money += 1;
     }
 
-    public synchronized void sleep(int hours) {
-        if (hours >= 0 && peppiness.get() <= maxPeppiness) {
-            peppiness.set(Math.min(peppiness.addAndGet(hours), maxPeppiness));
+    public void sleep(int hours) {
+        if (hours >= 0 && peppiness <= maxPeppiness) {
+            peppiness = Math.min(peppiness + hours, maxPeppiness);
         }
     }
 
-    public synchronized String buyFood(Food food) {
-        if (food.getPrice() > money.get())
+    public String buyFood(Food food) {
+        if (food.getPrice() > money)
             return "Недостаточно денег";
         if (fridge.containsKey(food.getName()))
             fridge.get(food.getName()).increaseAmount();
         else
             fridge.put(food.getName(), food);
-        money.addAndGet(-food.getPrice());
+        money -= food.getPrice();
         return "Холодильник пополнен";
     }
 
@@ -103,14 +102,14 @@ public class Pet {
         return assortment.toString();
     }
 
-    public synchronized void reduceHappiness() {
+    public void reduceHappiness() {
         if (happiness == 1)
             notifys.offer("Я очень сльно грущу");
         if (happiness > 0)
             happiness--;
     }
 
-    public synchronized void reduceSatiety() {
+    public void reduceSatiety() {
         if (satiety == 1)
             notifys.offer("Я голоден");
         if (satiety > 0)
@@ -119,90 +118,90 @@ public class Pet {
             reduceHappiness();
     }
 
-    public synchronized void reducePeppiness() {
+    public void reducePeppiness() {
         if (peppiness > 0)
             peppiness--;
         else
             reduceHappiness();
     }
 
-    public synchronized void increaseAge() {
+    public void increaseAge() {
         if (age < maxAge)
             age++;
     }
 
-    public synchronized int getSatiety() {
-        return satiety.get();
+    public int getSatiety() {
+        return satiety;
     }
 
-    public synchronized int getHappiness() {
-        return happiness.get();
+    public int getHappiness() {
+        return happiness;
     }
 
-    public synchronized int getPeppiness() {
-        return peppiness.get();
+    public int getPeppiness() {
+        return peppiness;
     }
 
-    public synchronized int getAge() {
-        return age.get();
+    public int getAge() {
+        return age;
     }
 
-    public synchronized String getName() {
+    public String getName() {
         return name;
     }
 
-    public synchronized int getMaxSatiety() {
+    public int getMaxSatiety() {
         return maxSatiety;
     }
 
-    public synchronized int getMaxHappiness() {
+    public int getMaxHappiness() {
         return maxHappiness;
     }
 
-    public synchronized int getMaxPeppiness() {
+    public int getMaxPeppiness() {
         return maxPeppiness;
     }
 
-    public synchronized int getMaxAge() {
+    public int getMaxAge() {
         return maxAge;
     }
 
-    public synchronized int getMoney() {
-        return money.get();
+    public int getMoney() {
+        return money;
     }
 
-    public synchronized HashMap<String, Food> getFridge() {
+    public HashMap<String, Food> getFridge() {
         return fridge;
     }
 
-    public synchronized void setSatiety(int satiety) {
+    public void setSatiety(int satiety) {
         if (satiety >= 0 && satiety <= maxSatiety)
-            this.satiety.set(satiety);
+            this.satiety = satiety;
     }
 
-    public synchronized void setHappiness(int happiness) {
+    public void setHappiness(int happiness) {
         if (happiness >= 0 && happiness <= maxHappiness)
-            this.happiness.set(happiness);
+            this.happiness = happiness;
     }
 
-    public synchronized void setPeppiness(int peppiness) {
+    public void setPeppiness(int peppiness) {
         if (peppiness >= 0 && peppiness <= maxPeppiness)
-            this.peppiness.set(peppiness);
+            this.peppiness = peppiness;
     }
 
-    public synchronized void setAge(int age) {
+    public void setAge(int age) {
         if (age >= 0 && age <= maxAge)
-            this.age.set(age);
+            this.age = age;
     }
 
-    public synchronized void setFridgeItem(Food food) {
+    public void setFridgeItem(Food food) {
         if (fridge.containsKey(food.getName()))
             fridge.get(food.getName()).increaseAmount();
         else
             fridge.put(food.getName(), food);
     }
 
-    public synchronized void setMoney(int money) {
-        this.money.set(money);
+    public void setMoney(int money) {
+        this.money = money;
     }
 }

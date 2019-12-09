@@ -75,7 +75,7 @@ public class BotLogic {
         }
     }
 
-    private synchronized static void queueAdd(String playerID, String value){
+    private static void queueAdd(String playerID, String value){
         if (!notifyQueue.containsKey(playerID))
             notifyQueue.put(playerID, new ArrayDeque<String>());
         var success = notifyQueue.get(playerID).offer(value);
