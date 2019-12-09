@@ -1,7 +1,7 @@
 import java.util.HashMap;
 
 public class FoodShop {
-    private HashMap<String, Food> assortment;
+    private static HashMap<String, Food> assortment;
 
     public FoodShop() {
         assortment = new HashMap<String, Food>();
@@ -10,7 +10,7 @@ public class FoodShop {
     }
 
     private void putFood(String name, int price, int saturation){
-        assortment.put(name, new Food(name, price, saturation, 1));
+        assortment.put(name, new Food(name, price, saturation));
     }
 
     public Food buy(String foodName) {
@@ -18,12 +18,12 @@ public class FoodShop {
     }
 
     public String showAssortment() {
-        StringBuilder assortment = new StringBuilder("Ассортимент продуктов:");
-        for (var foodName: this.assortment.keySet()){
-            var food = this.assortment.get(foodName);
-            assortment.append("\n" + foodName + " Цена: " + food.getPrice() + " Насыщение: " + food.getSaturation());
+        StringBuilder result = new StringBuilder("Ассортимент продуктов:");
+        for (var foodName: assortment.keySet()){
+            var food = assortment.get(foodName);
+            result.append("\n" + foodName + " Цена: " + food.getPrice() + " Насыщение: " + food.getSaturation());
         }
-        return assortment.toString();
+        return result.toString();
     }
 
     public HashMap<String, Food> getAssortment() {
