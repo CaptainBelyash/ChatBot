@@ -72,7 +72,8 @@ class PetTest {
             }
         }
     }
-
+    
+    /* TODO: это тестить когда будет класс плеера
     @Test
     void play() {
         for (var happiness : new int[]{0, 1, 2, 3, 9, pet.getMaxHappiness()})
@@ -91,7 +92,7 @@ class PetTest {
                     Assertions.assertEquals(0, pet.getPeppiness());
                 Assertions.assertEquals(originalMoney + 1, pet.getMoney());
             }
-    }
+    }*/
 
     @Test
     void sleep() {
