@@ -17,6 +17,7 @@ public class TgNotifyThread extends Thread{
             for (String playerID:
                     notifys.keySet()) {
                 try {
+
                     var nextNotify = notifys.get(playerID).poll();
                     while (nextNotify != null){
                         tgBot.sendMsg(playerID, nextNotify);

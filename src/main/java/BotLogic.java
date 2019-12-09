@@ -2,20 +2,24 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.ArrayDeque;
 import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 
 public class BotLogic {
     private static HashMap<String, Command> commandsList = new HashMap<>();
     private static HashMap<String, ArrayDeque<String>> notifyQueue = new HashMap<>();
     private static HashMap<String, Pet> pets = new HashMap<>();
+    private static HashMap<String, Fridge> fridges = new HashMap<>(); //повестить потом в класс Player
+    private static HashMap<String, AtomicInteger> moneys = new HashMap<>(); //повестить потом в класс Player
+    private static int initialMoney = 100; //повестить потом в класс Player
     private static String currentPlayerID = "";
     private static PetLife petLife;
     private static String helpOutput = "";
     private static FoodShop foodShop;
 
     public BotLogic() {
-        fillCommands();
         foodShop = new FoodShop();
+        fillCommands();
         var notifyMoveThread = new MoveNotificationThread(this);
         notifyMoveThread.start();
     }
@@ -107,6 +111,8 @@ public class BotLogic {
         if (pets.containsKey(currentPlayerID))
             return error("Pet exist");
         pets.put(currentPlayerID, new Pet(name));
+        fridges.put(currentPlayerID, new Fridge());
+        moneys.put(currentPlayerID, new AtomicInteger(initialMoney));
 
         petLife = new PetLife(pets.get(currentPlayerID));
 
@@ -126,17 +132,28 @@ public class BotLogic {
         if (args.length == 0)
             return error("Не указана еда.");
         var food = foodShop.buy(args[0]);
-        return pets.get(currentPlayerID).buyFood(food);
+        var money = moneys.get(currentPlayerID);
+        var fridge = fridges.get(currentPlayerID);
+        if (food.getPrice() > money.get())
+            return error("Недостаточно денег");
+        fridge.putFood(food);
+        money.addAndGet(-food.getPrice());
+        return "Холодильник пополнен!";
     }
 
     public synchronized static String feedCommand(String[] args) {
         if (args.length == 0)
             return error("Не указана еда.");
-        return pets.get(currentPlayerID).feed(args[0]);
+        var fridge = fridges.get(currentPlayerID);
+        if (!fridge.containsFood(args[0]))
+            return error("Такого продукта нет в холодильнике");
+        var food = fridge.getFood(args[0]);
+        return pets.get(currentPlayerID).feed(food);
     }
 
     public synchronized static String playCommand(String[] args) {
         pets.get(currentPlayerID).play();
+        moneys.get(currentPlayerID).incrementAndGet();
         return "Как весело! +1 к счастью";
     }
 
@@ -147,7 +164,9 @@ public class BotLogic {
     }
 
     private synchronized static String getCharacteristicsCommand(String[] args) {
-        return pets.get(currentPlayerID).getCharacteristics();
+        var result = pets.get(currentPlayerID).getCharacteristics();
+        result += "Деньги: " + moneys.get(currentPlayerID).get() + "\n";
+        return result;
     }
 
     private synchronized static String getAssortmentCommand(String[] args) {
@@ -155,7 +174,8 @@ public class BotLogic {
     }
 
     private synchronized static String getFridgeAssortmentCommand(String[] args) {
-        return pets.get(currentPlayerID).getFridgeAssortment();
+        var fridge = fridges.get(currentPlayerID);
+        return fridge.getAssortment();
     }
 
     public HashMap<String, Pet> getPets() {
@@ -174,5 +194,21 @@ public class BotLogic {
 
     public HashMap<String, ArrayDeque<String>> getNotifys() {
         return notifyQueue;
+    }
+
+    public Fridge getFridge() {
+        return fridges.get(currentPlayerID);
+    }
+
+    public void setFridgeItem(Food food) {
+        fridges.get(currentPlayerID).putFood(food);
+    }
+
+    public int getMoney() {
+        return moneys.get(currentPlayerID).get();
+    }
+
+    public void setMoney(int money) {
+        moneys.get(currentPlayerID).set(money);
     }
 }

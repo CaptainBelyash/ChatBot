@@ -62,17 +62,15 @@ class PetTest {
         var assortment = foodShop.getAssortment();
         for (var satiety : new int[]{0, 1, 2, 3, 9, pet.getMaxSatiety()}) {
             for (var food : assortment.keySet()) {
-                pet.setFridgeItem(assortment.get(food));
                 var saturation = assortment.get(food).getSaturation();
                 pet.setSatiety(satiety);
-                pet.feed(food);
+                pet.feed(assortment.get(food));
                 if (satiety + saturation <= pet.getMaxSatiety())
                     Assertions.assertEquals(satiety + saturation, pet.getSatiety());
                 else
                     Assertions.assertEquals(pet.getMaxSatiety(), pet.getSatiety());
             }
         }
-        Assertions.assertEquals(pet.feed(""), "Такого продукта нет в холодильнике");
     }
 
     @Test
@@ -170,28 +168,6 @@ class PetTest {
             pet.setAge(age);
             pet.increaseAge();
             Assertions.assertEquals(Math.min(age + 1, pet.getMaxAge()), pet.getAge());
-        }
-    }
-
-    @Test
-    void buyFood() {
-        var foodShop = new FoodShop();
-        var assortment = foodShop.getAssortment();
-        pet.setMoney(0);
-        for (var food : assortment.values()) {
-            Assertions.assertEquals("Недостаточно денег", pet.buyFood(food));
-        }
-        for (var food : assortment.values()) {
-            pet.setMoney(2 * food.getPrice());
-            pet.buyFood(food);
-            Assertions.assertEquals(food.getPrice(), pet.getMoney());
-            Assertions.assertTrue(pet.getFridge().containsKey(food.getName()));
-            Assertions.assertEquals(1, pet.getFridge().get(food.getName()).getAmount());
-
-            pet.buyFood(food);
-            Assertions.assertEquals(0, pet.getMoney());
-            Assertions.assertTrue(pet.getFridge().containsKey(food.getName()));
-            Assertions.assertEquals(2, pet.getFridge().get(food.getName()).getAmount());
         }
     }
 }

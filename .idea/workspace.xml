@@ -57,7 +57,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.BotLogicTest.buyCommand">
+  <component name="RunManager" selected="JUnit.BotLogicTest">
     <configuration name="BotLogicTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ChatBot" />
       <option name="PACKAGE_NAME" value="" />
@@ -77,22 +77,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BotLogicTest.feedCommand" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PetTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ChatBot" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="BotLogicTest" />
-      <option name="METHOD_NAME" value="feedCommand" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="BotLogicTest.playCommand" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ChatBot" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="BotLogicTest" />
-      <option name="METHOD_NAME" value="playCommand" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="PetTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -107,13 +96,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="PetTest.feed" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ChatBot" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="PetTest" />
+      <option name="METHOD_NAME" value="feed" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.BotLogicTest.buyCommand" />
         <item itemvalue="JUnit.BotLogicTest" />
-        <item itemvalue="JUnit.BotLogicTest.playCommand" />
-        <item itemvalue="JUnit.BotLogicTest.feedCommand" />
+        <item itemvalue="JUnit.PetTest" />
+        <item itemvalue="JUnit.PetTest.feed" />
         <item itemvalue="JUnit.PetTest.buyFood" />
+        <item itemvalue="JUnit.BotLogicTest.buyCommand" />
       </list>
     </recent_temporary>
   </component>

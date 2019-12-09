@@ -21,7 +21,7 @@ class BotLogicTest {
 
         for (var command : new String[]{"create", "sleep"}) {
             var result = botLogic.commandInput("", command);
-            Assertions.assertEquals(botLogic.error(""), result);
+            Assertions.assertEquals(botLogic.error("Something broke everything here. Maybe it was a ghost?"), result);
         }
     }
 
@@ -44,7 +44,7 @@ class BotLogicTest {
         for (var satiety : new int[]{0, 1, 2, 3, 9, pet.getMaxSatiety()}) {
             for (var food : assortment.values()) {
                 pet.setSatiety(satiety);
-                pet.setFridgeItem(food);
+                botLogic.setFridgeItem(food);
                 botLogic.feedCommand(new String[] {food.getName()});
                 Assertions.assertEquals(Math.min(satiety + food.getSaturation(), pet.getMaxSatiety()), pet.getSatiety());
             }
@@ -60,7 +60,7 @@ class BotLogicTest {
             for (var peppiness : new int[]{0, 1, 2, 3, 9, pet.getMaxPeppiness()}) {
                 pet.setPeppiness(peppiness);
                 pet.setHappiness(happiness);
-                var originalMoney = pet.getMoney();
+                var originalMoney = botLogic.getMoney();
                 botLogic.playCommand(new String[0]);
                 if (happiness < pet.getMaxHappiness())
                     Assertions.assertEquals(happiness + 1, pet.getHappiness());
@@ -70,7 +70,7 @@ class BotLogicTest {
                     Assertions.assertEquals(peppiness - 1, pet.getPeppiness());
                 else
                     Assertions.assertEquals(0, pet.getPeppiness());
-                Assertions.assertEquals(originalMoney + 1, pet.getMoney());
+                Assertions.assertEquals(originalMoney + 1, botLogic.getMoney());
             }
     }
 
@@ -105,26 +105,26 @@ class BotLogicTest {
 
     @Test
     void buyCommand() throws IOException {
-        Assertions.assertEquals("Error: Не указана еда.", botLogic.buyCommand(new String[0]));
         var foodShop = new FoodShop();
+        Assertions.assertEquals("Error: Не указана еда.", botLogic.buyCommand(new String[0]));
         var assortment = foodShop.getAssortment();
         botLogic.commandInput("1", "create pet");
         var pet = botLogic.getPets().get("1");
-        pet.setMoney(0);
-        for (var food : assortment.values()) {
-            Assertions.assertEquals("Недостаточно денег", pet.buyFood(food));
+        botLogic.setMoney(0);
+        for (var food : assortment.keySet()) {
+            Assertions.assertEquals("Недостаточно денег", botLogic.buyCommand(new String[] {food}));
         }
         for (var food : assortment.values()) {
-            pet.setMoney(2 * food.getPrice());
-            pet.buyFood(food);
+            botLogic.setMoney(2 * food.getPrice());
+            botLogic.buyFood(food);
             Assertions.assertEquals(food.getPrice(), pet.getMoney());
-            Assertions.assertTrue(pet.getFridge().containsKey(food.getName()));
-            Assertions.assertEquals(1, pet.getFridge().get(food.getName()).getAmount());
+            Assertions.assertTrue(pet.getFridge().containsFood(food.getName()));
+            Assertions.assertEquals(1, pet.getFridge().getAmount(food.getName()));
 
             pet.buyFood(food);
             Assertions.assertEquals(0, pet.getMoney());
-            Assertions.assertTrue(pet.getFridge().containsKey(food.getName()));
-            Assertions.assertEquals(2, pet.getFridge().get(food.getName()).getAmount());
+            Assertions.assertTrue(pet.getFridge().containsFood(food.getName()));
+            Assertions.assertEquals(2, pet.getFridge().getAmount(food.getName()));
         }
     }
 }
