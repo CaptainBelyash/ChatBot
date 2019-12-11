@@ -112,19 +112,19 @@ class BotLogicTest {
         var pet = botLogic.getPets().get("1");
         botLogic.setMoney(0);
         for (var food : assortment.keySet()) {
-            Assertions.assertEquals("Недостаточно денег", botLogic.buyCommand(new String[] {food}));
+            Assertions.assertEquals("Error: Недостаточно денег", botLogic.buyCommand(new String[] {food}));
         }
         for (var food : assortment.values()) {
             botLogic.setMoney(2 * food.getPrice());
-            botLogic.buyFood(food);
-            Assertions.assertEquals(food.getPrice(), pet.getMoney());
-            Assertions.assertTrue(pet.getFridge().containsFood(food.getName()));
-            Assertions.assertEquals(1, pet.getFridge().getAmount(food.getName()));
+            botLogic.buyCommand(new String[] {food.getName()});
+            Assertions.assertEquals(food.getPrice(), botLogic.getMoney());
+            Assertions.assertTrue(botLogic.getFridge().containsFood(food.getName()));
+            Assertions.assertEquals(1, botLogic.getFridge().getAmount(food.getName()));
 
-            pet.buyFood(food);
-            Assertions.assertEquals(0, pet.getMoney());
-            Assertions.assertTrue(pet.getFridge().containsFood(food.getName()));
-            Assertions.assertEquals(2, pet.getFridge().getAmount(food.getName()));
+            botLogic.buyCommand(new String[] {food.getName()});
+            Assertions.assertEquals(0, botLogic.getMoney());
+            Assertions.assertTrue(botLogic.getFridge().containsFood(food.getName()));
+            Assertions.assertEquals(2, botLogic.getFridge().getAmount(food.getName()));
         }
     }
 }

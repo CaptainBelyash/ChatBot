@@ -57,7 +57,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.BotLogicTest">
+  <component name="RunManager" selected="JUnit.PetTest">
     <configuration name="BotLogicTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ChatBot" />
       <option name="PACKAGE_NAME" value="" />
@@ -108,8 +108,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.BotLogicTest" />
         <item itemvalue="JUnit.PetTest" />
+        <item itemvalue="JUnit.BotLogicTest" />
         <item itemvalue="JUnit.PetTest.feed" />
         <item itemvalue="JUnit.PetTest.buyFood" />
         <item itemvalue="JUnit.BotLogicTest.buyCommand" />
