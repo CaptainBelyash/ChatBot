@@ -6,13 +6,13 @@ public class Pet {
     private AtomicInteger happiness;
     private AtomicInteger satiety; //сытость
     private AtomicInteger peppiness; //бодрость
-    private String name;
-    private Birthday birthday;
+    private final String name;
+    private final Birthday birthday;
     private AtomicInteger age;
 
     private ArrayDeque<String> notifys = new ArrayDeque<String>();
 
-    private int maxHealth = 10;
+    private int maxHealth = 10; //static
     private int maxSatiety = 10;
     private int maxPeppiness = 10;
     private int maxHappiness = 10;

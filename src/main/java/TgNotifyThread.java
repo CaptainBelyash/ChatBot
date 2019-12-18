@@ -2,9 +2,10 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.ArrayDeque;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class TgNotifyThread extends Thread{
-    private HashMap<String, ArrayDeque<String>> notifys;
+    private ConcurrentHashMap<String, ArrayDeque<String>> notifys;
     private TelegramBot tgBot;
     TgNotifyThread(TelegramBot tgBot){
         this.tgBot = tgBot;

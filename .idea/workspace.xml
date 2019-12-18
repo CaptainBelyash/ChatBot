@@ -77,6 +77,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="BotLogicTest.playCommand" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ChatBot" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="BotLogicTest" />
+      <option name="METHOD_NAME" value="playCommand" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BotLogicTest.sleepCommand" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ChatBot" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="BotLogicTest" />
+      <option name="METHOD_NAME" value="sleepCommand" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="PetTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ChatBot" />
       <option name="PACKAGE_NAME" value="" />
@@ -86,33 +106,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PetTest.buyFood" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ChatBot" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="PetTest" />
-      <option name="METHOD_NAME" value="buyFood" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PetTest.feed" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ChatBot" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="PetTest" />
-      <option name="METHOD_NAME" value="feed" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.PetTest" />
         <item itemvalue="JUnit.BotLogicTest" />
-        <item itemvalue="JUnit.PetTest.feed" />
-        <item itemvalue="JUnit.PetTest.buyFood" />
         <item itemvalue="JUnit.BotLogicTest.buyCommand" />
+        <item itemvalue="JUnit.BotLogicTest.sleepCommand" />
+        <item itemvalue="JUnit.BotLogicTest.playCommand" />
       </list>
     </recent_temporary>
   </component>

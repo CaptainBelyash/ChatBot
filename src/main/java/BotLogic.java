@@ -1,18 +1,17 @@
+import org.glassfish.grizzly.utils.ArrayUtils;
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.ArrayDeque;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 
 public class BotLogic {
     private static HashMap<String, Command> commandsList = new HashMap<>();
-    private static HashMap<String, ArrayDeque<String>> notifyQueue = new HashMap<>();
-    private static HashMap<String, Pet> pets = new HashMap<>();
-    private static HashMap<String, Fridge> fridges = new HashMap<>(); //повестить потом в класс Player
-    private static HashMap<String, AtomicInteger> moneys = new HashMap<>(); //повестить потом в класс Player
-    private static int initialMoney = 100; //повестить потом в класс Player
-    private static String currentPlayerID = "";
+    private static ConcurrentHashMap<String, ArrayDeque<String>> notifyQueue = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String, Player> players = new ConcurrentHashMap<>();
     private static PetLife petLife;
     private static String helpOutput = "";
     private static FoodShop foodShop;
@@ -55,26 +54,28 @@ public class BotLogic {
     }
 
     public static String commandInput(String playerID, String args) throws IOException {
-        currentPlayerID = playerID;
         var input = args.split(" ");
         var output = "";
         var userCommand = input[0];
         if (!commandsList.containsKey(userCommand)) {
             output = error("No such command");
-            queueAdd(currentPlayerID, output);
+            queueAdd(playerID, output);
             return output;
         }
-        var commandArgs = new String[0];
+        var commandArgs = new String[input.length];
+        commandArgs[0] = playerID;
         if (input.length > 1) {
-            commandArgs = Arrays.copyOfRange(input, 1, input.length);
+            for (var i = 1; i < input.length; i++){
+                commandArgs[i] = input[i];
+            }
         }
         try {
             output = commandsList.get(userCommand).execute(commandArgs);
-            queueAdd(currentPlayerID, output);
+            queueAdd(playerID, output);
             return output;
         } catch (Exception e) {
             output = error("Something broke everything here. Maybe it was a ghost?");
-            queueAdd(currentPlayerID, output);
+            queueAdd(playerID, output);
             return output;
         }
     }
@@ -106,66 +107,72 @@ public class BotLogic {
         return helpOutput;
     }
 
-    public static String createCommand(String[] args) {
-        var name = args[0];
-        if (pets.containsKey(currentPlayerID))
+    public synchronized static String createCommand(String[] args) {
+        var playerID = args[0];
+        if (args.length == 1)
+            return error("Не указано имя питомца");
+        var name = args[1];
+        if (players.containsKey(playerID))
             return error("Pet exist");
-        pets.put(currentPlayerID, new Pet(name));
-        fridges.put(currentPlayerID, new Fridge());
-        moneys.put(currentPlayerID, new AtomicInteger(initialMoney));
+        players.put(playerID, new Player(playerID, name));
 
-        petLife = new PetLife(pets.get(currentPlayerID));
+        petLife = new PetLife(players.get(playerID).getPet());
 
         Thread myThready = new Thread(petLife);
         myThready.start();
 
-        return pets.get(currentPlayerID).getCharacteristics();
+        return players.get(playerID).getPet().getCharacteristics();
 
     }
 
-    public static String deleteCommand(String[] args) {
-        pets.remove(currentPlayerID);
+    public synchronized static String deleteCommand(String[] args) {
+        var playerID = args[0];
+        players.remove(playerID);
         return "Питомец удален";
     }
 
     public synchronized static String buyCommand(String[] args) {
-        if (args.length == 0)
+        var playerID = args[0];
+        if (args.length == 1)
             return error("Не указана еда.");
-        var food = foodShop.buy(args[0]);
-        var money = moneys.get(currentPlayerID);
-        var fridge = fridges.get(currentPlayerID);
-        if (food.getPrice() > money.get())
+        var food = foodShop.buy(args[1]);
+        var player = players.get(playerID);
+        if (food.getPrice() > player.getMoney())
             return error("Недостаточно денег");
-        fridge.putFood(food);
-        money.addAndGet(-food.getPrice());
+        player.buyFood(food);
         return "Холодильник пополнен!";
     }
 
     public synchronized static String feedCommand(String[] args) {
-        if (args.length == 0)
+        var playerID = args[0];
+        if (args.length == 1)
             return error("Не указана еда.");
-        var fridge = fridges.get(currentPlayerID);
-        if (!fridge.containsFood(args[0]))
+        var player = players.get(playerID);
+        var fridge = player.getFridge();
+        if (!fridge.containsFood(args[1]))
             return error("Такого продукта нет в холодильнике");
-        var food = fridge.getFood(args[0]);
-        return pets.get(currentPlayerID).feed(food);
+        return player.feedPet(args[1]);
     }
 
     public synchronized static String playCommand(String[] args) {
-        pets.get(currentPlayerID).play();
-        moneys.get(currentPlayerID).incrementAndGet();
+        var player = players.get(args[0]);
+        player.playWithPet();
         return "Как весело! +1 к счастью";
     }
 
     private synchronized static String sleepCommand(String[] args) {
-        int hours = Integer.parseInt(args[0]);
-        pets.get(currentPlayerID).sleep(hours);
+        var player = players.get(args[0]);
+        if (args.length == 1)
+            return error("Не указано количестов часов.");
+        int hours = Integer.parseInt(args[1]);
+        player.sleepPet(hours);
         return "+" + Integer.toString(hours) + " к бодрости";
     }
 
     private synchronized static String getCharacteristicsCommand(String[] args) {
-        var result = pets.get(currentPlayerID).getCharacteristics();
-        result += "Деньги: " + moneys.get(currentPlayerID).get() + "\n";
+        var player = players.get(args[0]);
+        var result = player.getPet().getCharacteristics();
+        result += "Деньги: " + player.getMoney() + "\n";
         return result;
     }
 
@@ -174,41 +181,25 @@ public class BotLogic {
     }
 
     private synchronized static String getFridgeAssortmentCommand(String[] args) {
-        var fridge = fridges.get(currentPlayerID);
-        return fridge.getAssortment();
+        var player = players.get(args[0]);
+        return player.getFridge().getAssortment();
     }
 
-    public HashMap<String, Pet> getPets() {
-        return pets;
+    public ConcurrentHashMap<String, Player> getPlayers() {
+        return players;
     }
 
-    public void movePetNotify(){
-        for (var playerID:pets.keySet()){
-            var nextNotify = pets.get(playerID).getNotifys().poll();
+    public void movePetNotify() {
+        for (var playerID: players.keySet()){
+            var nextNotify = players.get(playerID).getPet().getNotifys().poll();
             while (nextNotify != null){
                 queueAdd(playerID, nextNotify);
-                nextNotify = pets.get(playerID).getNotifys().poll();
+                nextNotify = players.get(playerID).getPet().getNotifys().poll();
             }
         }
     }
 
-    public HashMap<String, ArrayDeque<String>> getNotifys() {
+    public ConcurrentHashMap<String, ArrayDeque<String>> getNotifys() {
         return notifyQueue;
-    }
-
-    public Fridge getFridge() {
-        return fridges.get(currentPlayerID);
-    }
-
-    public void setFridgeItem(Food food) {
-        fridges.get(currentPlayerID).putFood(food);
-    }
-
-    public int getMoney() {
-        return moneys.get(currentPlayerID).get();
-    }
-
-    public void setMoney(int money) {
-        moneys.get(currentPlayerID).set(money);
     }
 }

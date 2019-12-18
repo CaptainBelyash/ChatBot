@@ -1,13 +1,13 @@
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Fridge {
-    private HashMap<String, Food> products;
-    private HashMap<String, AtomicInteger> amounts;
+    private ConcurrentHashMap<String, Food> products;
+    private ConcurrentHashMap<String, AtomicInteger> amounts;
 
     public Fridge(){
-        products = new HashMap<String, Food>();
-        amounts = new HashMap<String, AtomicInteger>();
+        products = new ConcurrentHashMap<>();
+        amounts = new ConcurrentHashMap<>();
     }
 
     public boolean containsFood(String foodName) {
