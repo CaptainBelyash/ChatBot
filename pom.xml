@@ -41,7 +41,6 @@
     </build>
     <dependencies>
 
-        <!-- https://mvnrepository.com/artifact/com.google.apis/go.. -->
         <dependency>
             <groupId>com.google.apis</groupId>
             <artifactId>google-api-services-drive</artifactId>
@@ -49,14 +48,12 @@
         </dependency>
 
 
-        <!-- https://mvnrepository.com/artifact/com.google.api-cli.. -->
         <dependency>
             <groupId>com.google.api-client</groupId>
             <artifactId>google-api-client</artifactId>
             <version>1.23.0</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.google.oauth-c.. -->
         <dependency>
             <groupId>com.google.oauth-client</groupId>
             <artifactId>google-oauth-client-jetty</artifactId>
