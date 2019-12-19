@@ -30,6 +30,8 @@ public class Player {
     }
 
     public String letsPlay(String game) {
+        if (!games.getGames().containsKey(game))
+            return "Такой игры нет";
         inGame = true;
         games.play(game);
         return "Давай поиграем!";

@@ -22,7 +22,7 @@ public class Games {
         if (currentGame.equals("GuessNumber")) {
             return this.guessNumber.makeGuess(Integer.parseInt(args[0]));
         }
-        return "Такой игры нет";
+        return "Произошла ошибка";
     }
 
     public static String getGamesAssortment() {
@@ -46,5 +46,9 @@ public class Games {
             return 50 - guessNumber.getTries();
         }
         return 0;
+    }
+
+    public HashMap<String, String> getGames() {
+        return gamesAssortment;
     }
 }
