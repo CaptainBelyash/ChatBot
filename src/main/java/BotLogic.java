@@ -52,11 +52,12 @@ public class BotLogic {
     public static String commandInput(String playerID, String args) throws IOException {
         var input = args.split(" ");
         var output = "";
-        if (players.containsKey(playerID) && players.get(playerID).playerInGame()){
-            output = players.get(playerID).play(input);
-            queueAdd(playerID, output);
-            return output;
-        }
+        if (players.containsKey(playerID))
+            if (players.get(playerID).playerInGame()){
+                output = players.get(playerID).play(input);
+                queueAdd(playerID, output);
+                return output;
+            }
         var userCommand = input[0];
         if (!commandsList.containsKey(userCommand)) {
             output = error("No such command");

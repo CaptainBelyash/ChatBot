@@ -1,6 +1,6 @@
 import java.util.HashMap;
 
-public class Games extends Game {
+public class Games {
     private static HashMap<String, String> gamesAssortment;
 
     public Games() {
