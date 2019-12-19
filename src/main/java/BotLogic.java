@@ -45,6 +45,8 @@ public class BotLogic {
                 BotLogic::getAssortmentCommand);
         makeCommand("fridge", "fridge: Получить содержимое холодильника.",
                 BotLogic::getFridgeAssortmentCommand);
+        makeCommand("games", "games: Показать доступные игры.",
+                BotLogic::getGamesAssortmentCommand);
         makeCommand("/start", "start",
                 BotLogic::greetings);
     }

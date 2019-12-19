@@ -48,6 +48,8 @@ public class Player {
         var result = game.makeGuess(Integer.parseInt(args[0]));
         if (game.getWin()) {
             inGame = false;
+            money.addAndGet(50 - game.getTries());
+            pet.play();
         }
         return result;
     }
