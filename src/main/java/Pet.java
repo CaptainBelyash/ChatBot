@@ -34,6 +34,8 @@ public class Pet {
 
     public String feed(Food food) {
         satiety.addAndGet(food.getSaturation());
+        if (happiness.get() < maxHappiness)
+            happiness.incrementAndGet();
         if (satiety.get() >= maxSatiety){
             satiety.set(maxSatiety);
             return "Я наелся!";
@@ -46,6 +48,10 @@ public class Pet {
             happiness.incrementAndGet();
         if (peppiness.get() != 0)
             peppiness.decrementAndGet();
+        else {
+            reduceSatiety();
+            notifys.offer("Я устал");
+        }
     }
 
     public void sleep(int hours) {
@@ -80,14 +86,22 @@ public class Pet {
         if (satiety.get() > 0)
             satiety.decrementAndGet();
         else
-            reduceHappiness();
+            reduceHealth();
     }
 
     public void reducePeppiness() {
+        if (peppiness.get() == 1)
+            notifys.offer("Я устал");
         if (peppiness.get() > 0)
             peppiness.decrementAndGet();
         else
-            reduceHappiness();
+            reduceHealth();
+    }
+
+    public void reduceHealth() {
+        if (health.get() > 0)
+            health.decrementAndGet();
+        reduceHappiness();
     }
 
     public void increaseAge() {
