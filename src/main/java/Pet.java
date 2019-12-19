@@ -9,6 +9,7 @@ public class Pet {
     private final String name;
     private final Birthday birthday;
     private AtomicInteger age;
+    private String Avatar;
 
     private ArrayDeque<String> notifys = new ArrayDeque<String>();
 
