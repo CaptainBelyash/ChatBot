@@ -52,7 +52,7 @@ public class BotLogic {
     public static String commandInput(String playerID, String args) throws IOException {
         var input = args.split(" ");
         var output = "";
-        if (players.get(playerID).playerInGame()){
+        if (players.contains(playerID) && players.get(playerID).playerInGame()){
             output = players.get(playerID).play(input.clone());
             queueAdd(playerID, output);
             return output;
