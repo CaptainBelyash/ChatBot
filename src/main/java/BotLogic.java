@@ -1,11 +1,7 @@
-import org.glassfish.grizzly.utils.ArrayUtils;
-
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 
 public class BotLogic {
@@ -56,6 +52,11 @@ public class BotLogic {
     public static String commandInput(String playerID, String args) throws IOException {
         var input = args.split(" ");
         var output = "";
+        if (players.get(playerID).playerInGame()){
+            output = players.get(playerID).play(input.clone());
+            queueAdd(playerID, output);
+            return output;
+        }
         var userCommand = input[0];
         if (!commandsList.containsKey(userCommand)) {
             output = error("No such command");
@@ -154,10 +155,13 @@ public class BotLogic {
         return player.feedPet(args[1]);
     }
 
+    public synchronized static String getGamesAssortmentCommand(String[] args) {
+        return Games.getGamesAssortment();
+    }
+
     public synchronized static String playCommand(String[] args) {
         var player = players.get(args[0]);
-        player.playWithPet();
-        return "Как весело! +1 к счастью";
+        return player.letsPlay(args[1]);
     }
 
     private synchronized static String sleepCommand(String[] args) {
