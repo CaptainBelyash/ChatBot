@@ -26,10 +26,10 @@ public class TelegramBot extends TelegramLongPollingBot {
     public synchronized void userAction(String chatId, String input) throws TelegramApiException{
         try {
             var out = bot.commandInput(chatId, input);
-            if(out.equals("avatar")){
-                SendPhoto message = new SendPhoto().setChatId(chatId).setPhoto("https://sun9-49.userapi.com/c855528/v855528744/1a8a08/8jwCXYMIu3Y.jpg");
-                execute(message);
-            }
+//            if (out.equals("avatar")){
+//                SendPhoto message = new SendPhoto().setChatId(chatId).setPhoto("https://sun9-49.userapi.com/c855528/v855528744/1a8a08/8jwCXYMIu3Y.jpg");
+//                execute(message);
+//            }
         } catch (IOException e) {
             e.printStackTrace();
         }

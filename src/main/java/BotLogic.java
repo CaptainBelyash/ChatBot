@@ -28,7 +28,7 @@ public class BotLogic {
         makeCommand("help", "help: Выводит список доступных комманд.", BotLogic::helpCommand);
         makeCommand("create", "create [name]: Создаёт нового питомца с именем name.",
                 BotLogic::createCommand);
-        makeCommand("avatar", "", BotLogic::showAvatar);
+        //makeCommand("avatar", "", BotLogic::showAvatar);
         makeCommand("feed", "feed [food]: Покормить питомца едой food. Увеличивает сытость. Кормить питомца можно только едой из холодильника.",
                 BotLogic::feedCommand);
         makeCommand("play", "play [game]: Поиграть с питомцем в игру game. Прибавляет 1 к счастью и отнимает 1 от бодрости. Добавляет деньги.",
@@ -52,9 +52,9 @@ public class BotLogic {
                 BotLogic::greetings);
     }
 
-    private static String showAvatar(String[] strings) {
-        return "avatar";
-    }
+//    private static String showAvatar(String[] strings) {
+//        return "avatar";
+//    }
 
     public static String commandInput(String playerID, String args) throws IOException {
         var input = args.split(" ");
