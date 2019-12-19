@@ -1,6 +1,9 @@
 import org.glassfish.grizzly.utils.ArrayUtils;
+import org.o7planning.googledrive.quickstart.GoogleDrive;
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 
 import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.Arrays;
 import java.util.ArrayDeque;
 import java.util.HashMap;
@@ -30,6 +33,7 @@ public class BotLogic {
 
     private static void fillCommands() {
         makeCommand("help", "help: Выводит список доступных комманд.", BotLogic::helpCommand);
+       // makeCommand("avatars","avatars: Выводит доступные аватарки для вашего питомца",  );
         makeCommand("create", "create [name]: Создаёт нового питомца с именем name.",
                 BotLogic::createCommand);
         makeCommand("feed", "feed [food]: Покормить питомца едой food. Увеличивает сытость. Кормить питомца можно только едой из холодильника.",
@@ -107,6 +111,10 @@ public class BotLogic {
         return helpOutput;
     }
 
+    private static String showAvatars(String[] args) throws IOException, GeneralSecurityException {
+        return "выведи изображение";
+    }
+
     public synchronized static String createCommand(String[] args) {
         var playerID = args[0];
         if (args.length == 1)
@@ -122,7 +130,6 @@ public class BotLogic {
         myThready.start();
 
         return players.get(playerID).getPet().getCharacteristics();
-
     }
 
     public synchronized static String deleteCommand(String[] args) {

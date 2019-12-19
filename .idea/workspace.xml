@@ -34,6 +34,7 @@
   <component name="ProjectId" id="1Rf0zrjT95kZtzfMe2gUCvbtZ4O" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/telegrambots-4.4.0.1-jar-with-dependencies.jar!/" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
@@ -57,7 +58,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.PetTest">
+  <component name="RunManager" selected="Application.GoogleDrive">
+    <configuration name="GoogleDrive" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.o7planning.googledrive.quickstart.GoogleDrive" />
+      <module name="ChatBot" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.o7planning.googledrive.quickstart.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="BotLogicTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ChatBot" />
       <option name="PACKAGE_NAME" value="" />
@@ -72,16 +86,6 @@
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="BotLogicTest" />
       <option name="METHOD_NAME" value="buyCommand" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="BotLogicTest.playCommand" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ChatBot" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="BotLogicTest" />
-      <option name="METHOD_NAME" value="playCommand" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -108,11 +112,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.GoogleDrive" />
         <item itemvalue="JUnit.PetTest" />
         <item itemvalue="JUnit.BotLogicTest" />
         <item itemvalue="JUnit.BotLogicTest.buyCommand" />
         <item itemvalue="JUnit.BotLogicTest.sleepCommand" />
-        <item itemvalue="JUnit.BotLogicTest.playCommand" />
       </list>
     </recent_temporary>
   </component>
