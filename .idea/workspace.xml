@@ -57,7 +57,14 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.PetTest">
+  <component name="RunManager" selected="JUnit.BotLogicTest.playCommand">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="ChatBot" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="BotLogicTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ChatBot" />
       <option name="PACKAGE_NAME" value="" />
@@ -87,16 +94,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BotLogicTest.sleepCommand" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ChatBot" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="BotLogicTest" />
-      <option name="METHOD_NAME" value="sleepCommand" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="PetTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ChatBot" />
       <option name="PACKAGE_NAME" value="" />
@@ -108,11 +105,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.BotLogicTest.playCommand" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.PetTest" />
         <item itemvalue="JUnit.BotLogicTest" />
         <item itemvalue="JUnit.BotLogicTest.buyCommand" />
-        <item itemvalue="JUnit.BotLogicTest.sleepCommand" />
-        <item itemvalue="JUnit.BotLogicTest.playCommand" />
       </list>
     </recent_temporary>
   </component>
@@ -146,5 +143,16 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/ChatBot" />
     </ignored-roots>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/BotLogicTest.java</url>
+          <line>58</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

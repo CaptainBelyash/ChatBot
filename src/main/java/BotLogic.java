@@ -53,7 +53,7 @@ public class BotLogic {
         var input = args.split(" ");
         var output = "";
         if (players.containsKey(playerID) && players.get(playerID).playerInGame()){
-            output = players.get(playerID).play(input.clone());
+            output = players.get(playerID).play(input);
             queueAdd(playerID, output);
             return output;
         }
