@@ -39,7 +39,7 @@ public class Games {
     public static String getGamesAssortment() {
         StringBuilder help = new StringBuilder("\nИгры:");
         for (var game : gamesAssortment.keySet()) {
-            help.append("\n");
+            help.append("\n" + game + ": ");
             help.append(gamesAssortment.get(game));
         }
         return help.toString();

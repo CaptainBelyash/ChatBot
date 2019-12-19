@@ -26,6 +26,10 @@ public class BullsAndCows {
                     cows++;
             }
         }
+        if (bulls == 5) {
+            win = true;
+            return "Вы угадали!";
+        }
         return "Коровы: " + cows + "\nБыки: " + bulls;
     }
 
