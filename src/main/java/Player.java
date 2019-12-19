@@ -6,9 +6,7 @@ public class Player {
     private Fridge fridge;
     private AtomicInteger money;
     private boolean inGame = false;
-    private String currentGame;
     private Games games;
-    private GuessTheNumberGame game;
 
 
     private static final int initialMoney = 100;
@@ -33,10 +31,7 @@ public class Player {
 
     public String letsPlay(String game) {
         inGame = true;
-        currentGame = game;
-        if (currentGame.equals("GuessNumber")) {
-            this.game = new GuessTheNumberGame();
-        }
+        games.play(game);
         return "Давай поиграем!";
     }
 
@@ -45,10 +40,10 @@ public class Player {
     }
 
     public String play(String[] args) {
-        var result = game.makeGuess(Integer.parseInt(args[0]));
-        if (game.getWin()) {
+        var result = games.doAction(args);
+        if (games.getWin()) {
             inGame = false;
-            money.addAndGet(50 - game.getTries());
+            money.addAndGet(games.getMoney());
             pet.play();
         }
         return result;

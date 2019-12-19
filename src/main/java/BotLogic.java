@@ -30,7 +30,7 @@ public class BotLogic {
                 BotLogic::createCommand);
         makeCommand("feed", "feed [food]: Покормить питомца едой food. Увеличивает сытость. Кормить питомца можно только едой из холодильника.",
                 BotLogic::feedCommand);
-        makeCommand("play", "play: Поиграть с питомцем. Прибавляет 1 к счастью и отнимает 1 от бодрости. Добавляет деньги.",
+        makeCommand("play", "play [game]: Поиграть с питомцем в игру game. Прибавляет 1 к счастью и отнимает 1 от бодрости. Добавляет деньги.",
                 BotLogic::playCommand);
         makeCommand("sleep",
                 "sleep [hours]: Отправить питомца спать на hours часов. Прибавляет hours к бодрости.",

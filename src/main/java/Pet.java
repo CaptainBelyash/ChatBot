@@ -12,11 +12,11 @@ public class Pet {
 
     private ArrayDeque<String> notifys = new ArrayDeque<String>();
 
-    private int maxHealth = 10; //static
-    private int maxSatiety = 10;
-    private int maxPeppiness = 10;
-    private int maxHappiness = 10;
-    private int maxAge = 100;
+    private static final int maxHealth = 10;
+    private static final int maxSatiety = 10;
+    private static final int maxPeppiness = 10;
+    private static final int maxHappiness = 10;
+    private static final int maxAge = 100;
 
     public ArrayDeque<String> getNotifys() {
         return notifys;
