@@ -1,5 +1,6 @@
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -25,6 +26,10 @@ public class TelegramBot extends TelegramLongPollingBot {
     public synchronized void userAction(String chatId, String input) throws TelegramApiException{
         try {
             var out = bot.commandInput(chatId, input);
+            if(out.equals("avatar")){
+                SendPhoto message = new SendPhoto().setChatId(chatId).setPhoto("https://sun9-49.userapi.com/c855528/v855528744/1a8a08/8jwCXYMIu3Y.jpg");
+                execute(message);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
